@@ -42,7 +42,7 @@ const VisionMissionPages = () => {
         </div>
         <div className="space-y-6">
           <div>
-            <h1 className="text-primary2 text-3xl font-bold">Visi</h1>
+            <h1 className="text-primary2 text-3xl font-bold mb-4">Visi</h1>
             <h2 className="text-justify text-sm leading-relaxed">
               Sebagai Salah Satu Organisasi Intra Kampus, HMIF didirikan dengan
               tujuan untuk ikut mengupayakan tercapainya tujuan pendidikan dan
