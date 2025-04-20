@@ -1,9 +1,12 @@
 import HeroSection from "./Section/HeroSection";
-
+import VideoProfilePages from "./Section/VideoProfilePages";
+import VisionMissionPages from "./Section/VisionMissionPages";
 const HomePage = () => {
   return (
-    <div className="px-10 py-5">
+    <div className="py-10 space-y-16 animate-slide-in">
       <HeroSection />
+      <VideoProfilePages />
+      <VisionMissionPages />
     </div>
   );
 };
