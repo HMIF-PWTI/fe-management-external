@@ -12,13 +12,13 @@ const HeaderNavigation = () => {
 
       <div className="space-x-6 text-sm text-md text-hitam p-2">
         <a
-          href=""
+          href="/"
           className="transform hover:scale-125 transition duration-200 inline-block"
         >
           Home
         </a>
         <a
-          href=""
+          href="/about"
           className="transform hover:scale-125 transition duration-200 inline-block"
         >
           About
