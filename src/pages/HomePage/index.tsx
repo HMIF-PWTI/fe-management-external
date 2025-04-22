@@ -1,12 +1,20 @@
+import { useRef } from "react";
 import HeroSection from "./Section/HeroSection";
 import VideoProfilePages from "./Section/VideoProfilePages";
 import VisionMissionPages from "./Section/VisionMissionPages";
+
 const HomePage = () => {
+  const visionRef = useRef<HTMLDivElement>(null);
+
   return (
     <div className="py-10 space-y-16 animate-slide-in">
-      <HeroSection />
+      <HeroSection
+        scrollToVision={() =>
+          visionRef.current?.scrollIntoView({ behavior: "smooth" })
+        }
+      />
       <VideoProfilePages />
-      <VisionMissionPages />
+      <VisionMissionPages ref={visionRef} />
     </div>
   );
 };
