@@ -7,14 +7,20 @@ const HomePage = () => {
   const visionRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="py-10 space-y-16 animate-slide-in">
-      <HeroSection
-        scrollToVision={() =>
-          visionRef.current?.scrollIntoView({ behavior: "smooth" })
-        }
-      />
-      <VideoProfilePages />
-      <VisionMissionPages ref={visionRef} />
+    <div className="py-10">
+      <div>
+        <HeroSection
+          scrollToVision={() =>
+            visionRef.current?.scrollIntoView({ behavior: "smooth" })
+          }
+        />
+      </div>
+      <div className="animate-slide-in">
+        <VideoProfilePages />
+      </div>
+      <div className="mt-24">
+        <VisionMissionPages ref={visionRef} />
+      </div>
     </div>
   );
 };
