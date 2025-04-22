@@ -13,7 +13,7 @@ const VideoProfilePages = () => {
           <h1 className="text-4xl font-bold text-primary2">Vidio Profil</h1>
           <p className="text-sm text-gray-800 text-justify leading-relaxed">
             Vidio ini merupakan vidio perkenalan resmi dari kepengurusan
-            Himpunan Mahasiswa Informatika (HMIF) UNIKOM untuk satu periode
+            Himpunan Mahasiswa Teknik Informatika (HMIF) UNIKOM untuk satu periode
             Kabinet Dakshawira (2024/2025). Menampilkan wajah-wajah fungsionaris
             dan berbagai program kerja unggulan, video ini menjadi representasi
             visi dan misi HMIF UNIKOM dalam menciptakan organisasi yang solid,
