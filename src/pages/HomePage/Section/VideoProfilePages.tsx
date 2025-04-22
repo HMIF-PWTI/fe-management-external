@@ -6,16 +6,20 @@ const VideoProfilePages = () => {
       <img
         src={gerigi}
         alt="Gerigi"
-        className="absolute left-0 top-0 h-96 w-auto object-cover"
+        className="absolute right-0 top-0 h-96 w-auto object-cover scale-x-[-1]"
       />
       <div className="grid grid-cols-2 gap-16 bg-white border-2 border-primary2 rounded-2xl p-10 w-full">
         <div className="flex flex-col justify-between items-start">
           <h1 className="text-4xl font-bold text-primary2">Vidio Profil</h1>
           <p className="text-sm text-gray-800 text-justify leading-relaxed">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
+            Vidio ini merupakan vidio perkenalan resmi dari kepengurusan
+            Himpunan Mahasiswa Informatika (HMIF) UNIKOM untuk satu periode
+            Kabinet Dakshawira (2024/2025). Menampilkan wajah-wajah fungsionaris
+            dan berbagai program kerja unggulan, video ini menjadi representasi
+            visi dan misi HMIF UNIKOM dalam menciptakan organisasi yang solid,
+            profesional, dan inspiratif. Melalui video ini, kami ingin mengajak
+            seluruh anggota untuk bersama-sama bergerak maju, bekerja cerdas,
+            dan memberikan kontribusi terbaik bagi himpunan.
           </p>
           <div className="text-sm">
             <p>#MajuSolidJaya</p>
@@ -24,8 +28,8 @@ const VideoProfilePages = () => {
         </div>
         <div className="flex items-center justify-end">
           <iframe
-            width="500"
-            height="250"
+            width="640"
+            height="360"
             src="https://www.youtube.com/embed/OFfpeRQpo4U"
             title="YouTube video"
             frameBorder="0"

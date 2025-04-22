@@ -1,6 +1,6 @@
 import LogoHMIF from "@/assets/Logo/LogoHMIF.png";
 import LogoDakshawira from "@/assets/Logo/LogoDakshawira.png";
-import { FaCartShopping } from "react-icons/fa6";
+import { GiMagicPortal } from "react-icons/gi";
 
 const HeaderNavigation = () => {
   return (
@@ -39,18 +39,18 @@ const HeaderNavigation = () => {
           href=""
           className="transform hover:scale-125 transition duration-200 inline-block"
         >
-          Contact Us
+          Lapak KWU
         </a>
       </div>
 
       <div className="flex items-center space-x-4">
         <button className="text-sm text-hitam hover:scale-110 transform transition duration-200">
-          Report
+          Kontak
         </button>
 
         <button className="flex items-center hover:scale-105 gap-2 px-4 py-2 rounded-lg text-sm text-white bg-primary2 border border-primary2 hover:border-primary2 hover:text-primary2 hover:bg-white transition-all">
-          Lapak KWU
-          <FaCartShopping size={16} />
+          Portal IF
+          <GiMagicPortal size={16} />
         </button>
       </div>
     </div>
