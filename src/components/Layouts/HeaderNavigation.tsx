@@ -1,10 +1,35 @@
 import LogoHMIF from "@/assets/Logo/LogoHMIF.png";
 import LogoDakshawira from "@/assets/Logo/LogoDakshawira.png";
 import { GiMagicPortal } from "react-icons/gi";
+import { useEffect, useState } from "react";
 
 const HeaderNavigation = () => {
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < lastScrollY && currentScrollY > 80) {
+        setShowNavbar(false);
+      } else {
+        setShowNavbar(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+
   return (
-    <div className="flex justify-between px-36 py-4 bg-white shadow-lg border-dark1 items-center">
+    <div className={`sticky top-0 z-50 px-36 py-4 flex justify-between items-center bg-white shadow-lg border-dark1 transition-transform duration-300 ${
+      showNavbar ? "translate-y-0" : "-translate-y-full"
+    }`}>
       <div className="flex space-x-2 items-center justify-center">
         <img src={LogoHMIF} alt="" className="w-12" />
         <img src={LogoDakshawira} alt="" className="w-10" />
