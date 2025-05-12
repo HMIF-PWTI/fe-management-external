@@ -100,14 +100,14 @@ const Footer = () => {
                 target="_blank"
                 className="flex hover:underline"
               >
-                <FaPhoneAlt className="text-sm mr-3" /> 08225993438 (External)
+                <FaPhoneAlt className="text-sm mr-3" /> 08225993438 (Sukma Novianti Tulak)
               </a>
               <a
                 href="https://api.whatsapp.com/send/?phone=6285797421462&text&type=phone_number&app_absent=0"
                 target="_blank"
                 className="flex hover:underline"
               >
-                <FaPhoneAlt className="text-sm mr-3" /> 085797421462 (Internal)
+                <FaPhoneAlt className="text-sm mr-3" /> 085797421462 (Salsya Fadillah)
               </a>
               <div>
                 <button className="p-2 border border-white rounded-lg text-xs">Selengkapnya</button>

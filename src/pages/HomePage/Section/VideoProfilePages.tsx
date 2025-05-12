@@ -1,4 +1,4 @@
-import gerigi from "assets/gerigi.png";
+import gerigi from "@/assets/gerigi.png";
 
 const VideoProfilePages = () => {
   return (
