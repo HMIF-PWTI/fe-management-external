@@ -10,8 +10,6 @@
   display: none;
 }
 
-
-
 @layer utilities {
   @keyframes slideIn {
     0% {
@@ -28,3 +26,30 @@
     animation: slideIn 0.5s ease-out;
   }
 }
+
+.embla__container {
+  display: flex;
+  gap: 1rem;
+}
+
+.embla__slide {
+  flex: 0 0 24%;
+  height: 500px;
+}
+
+.embla {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.embla__container {
+  display: flex;
+  gap: 1rem;
+}
+
+.text-indent {
+  text-indent: 3rem;
+}
+
+

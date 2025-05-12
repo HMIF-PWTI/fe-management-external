@@ -1,7 +1,5 @@
-import heroImage from "assets/hmif.jpg";
-import keren from "assets/keren2.png"
-import keren2 from "assets/keren3.png"
-import garis4 from "assets/keren.png"
+import heroImage from "@/assets/hmif.jpg";
+import keren from "@/assets/keren2.png";
 
 interface HeroSectionProps {
   scrollToVision: () => void;
@@ -11,7 +9,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToVision }) => {
   return (
     <div className="h-screen -mt-20 px-36 grid grid-cols-2 gap-10 items-center justify-center">
       <div className=" text-5xl font-bold space-y-3">
-        <img src={keren} className="absolute w-64 top-[85px] -left-[150px] scale-y-[-1]" />
+        <img
+          src={keren}
+          className="absolute w-64 top-[85px] -left-[150px] scale-y-[-1]"
+        />
         <img src={keren} className="absolute w-64 top-[589px] -left-[150px]" />
         <h1 className="animate-slide-in">HMIF UNIKOM</h1>
         <h1 className="animate-slide-in">2024/2025</h1>

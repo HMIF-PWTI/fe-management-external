@@ -1,9 +1,9 @@
-import gerigi from "assets/gerigi.png";
-import logo from "assets/Logo/LogoDakshawira.png";
+import gerigi from "@/assets/gerigi.png";
+import logo from "@/assets/Logo/LogoDakshawira.png";
 import { useState } from "react";
 
-const HeroSection = () => {
-  const [showAll,] = useState(false);
+const HeroSection: React.FC = () => {
+  const [showAll] = useState(false);
 
   const misiList = [
     "Membangun Budaya Profesionalisme Dan Kekeluargaan Di Antara Fungsionaris Untuk Menciptakan Lingkungan Kerja Yang Harmonis, Solid, Dan Produktif",

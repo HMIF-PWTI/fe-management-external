@@ -1,54 +1,29 @@
-import kadiv from "assets/kadiv.png";
-import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Autoplay,
-  Pagination,
-  Navigation,
-  EffectCreative,
-} from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/effect-creative";
-
-const images = [kadiv, kadiv, kadiv];
+import MemberCard from "@/components/MemberCard";
+import { getAnggota } from "@/service";
+import { intiData } from "@/utils/DummyData";
+import { Anggota } from "@/utils/interface";
+import { useEffect, useState } from "react";
 
 const IntiSection = () => {
+  const [data, setData] = useState<Anggota[]>([]);
+
+  useEffect(() => {
+    const fetchData = async() => {
+      const response = await getAnggota();
+      console.log(response.data.payload)
+    };
+    fetchData();
+  }, [])
   return (
-    <div className="flex flex-col items-center justify-center px-36">
-      <h1 className="text-2xl font-bold text-primary2 mb-10">4 INTI</h1>
-      <Swiper
-        modules={[Autoplay, Pagination, Navigation, EffectCreative]}
-        effect="creative"
-        spaceBetween={30}
-        centeredSlides={true}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        creativeEffect={{
-          prev: {
-            shadow: true,
-            translate: ["-120%", 0, -500],
-          },
-          next: {
-            shadow: true,
-            translate: ["120%", 0, -500],
-          },
-        }}
-        pagination={{ clickable: true }}
-        navigation={true}
-        className="w-full max-w-5xl rounded-xl overflow-hidden"
-      >
-        {images.map((src, index) => (
-          <SwiperSlide key={index}>
-            <img
-              src={src}
-              alt={`Slide ${index + 1}`}
-              className="w-full h-auto object-cover"
-            />
-          </SwiperSlide>
+    <div className="flex flex-col items-center justify-center px-36 space-y-10">
+      <h1 className="text-primary2 text-2xl font-bold">4 INTI</h1>
+      <div className="grid grid-cols-4 gap-5">
+        {intiData.map((data, index) => (
+          <div key={index} className="h-full">
+            <MemberCard {...data} />
+          </div>
         ))}
-      </Swiper>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { forwardRef, useState } from "react";
-import gerigi from "assets/gerigi.png";
-import kuda from "assets/Logo/LogoHMIF.png";
+import gerigi from "@/assets/gerigi.png";
+import kuda from "@/assets/Logo/LogoHMIF.png";
 interface VisionMissionPagesProps {}
 
 const VisionMissionPages = forwardRef<HTMLDivElement, VisionMissionPagesProps>(

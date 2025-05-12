@@ -49,19 +49,25 @@ const HeaderNavigation = () => {
           About
         </a>
         <a
-          href=""
+          href="/blog"
           className="transform hover:scale-125 transition duration-200 inline-block"
         >
           Blog
         </a>
         <a
-          href=""
+          href="/ifpedia"
           className="transform hover:scale-125 transition duration-200 inline-block"
         >
           IF-Pedia
         </a>
         <a
-          href=""
+          href="/kegiatan"
+          className="transform hover:scale-125 transition duration-200 inline-block"
+        >
+          Kegiatan
+        </a>
+        <a
+          href="lapakkwu"
           className="transform hover:scale-125 transition duration-200 inline-block"
         >
           Lapak KWU
