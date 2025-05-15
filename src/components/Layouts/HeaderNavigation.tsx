@@ -25,11 +25,12 @@ const HeaderNavigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-
   return (
-    <div className={`sticky top-0 z-50 px-36 py-4 flex justify-between items-center bg-white shadow-lg border-dark1 transition-transform duration-300 ${
-      showNavbar ? "translate-y-0" : "-translate-y-full"
-    }`}>
+    <div
+      className={`sticky top-0 z-50 px-36 py-4 flex justify-between items-center bg-white shadow-lg border-dark1 transition-transform duration-300 ${
+        showNavbar ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div className="flex space-x-2 items-center justify-center">
         <img src={LogoHMIF} alt="" className="w-12" />
         <img src={LogoDakshawira} alt="" className="w-10" />
@@ -72,17 +73,29 @@ const HeaderNavigation = () => {
         >
           Lapak KWU
         </a>
+        <a
+          href="infokp"
+          className="transform hover:scale-125 transition duration-200 inline-block"
+        >
+          Info KP
+        </a>
       </div>
 
       <div className="flex items-center space-x-4">
         <button className="text-sm text-hitam hover:scale-110 transform transition duration-200">
           Kontak
         </button>
-
-        <button className="flex items-center hover:scale-105 gap-2 px-4 py-2 rounded-lg text-sm text-white bg-primary2 border border-primary2 hover:border-primary2 hover:text-primary2 hover:bg-white transition-all">
-          Portal IF
-          <GiMagicPortal size={16} />
-        </button>
+        <a
+          href="https://www.whatsapp.com/channel/0029VbAdgGMAInPduHcDwk0g"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-lg"
+        >
+          <button className="flex items-center hover:scale-105 gap-2 px-4 py-2 rounded-lg text-sm text-white bg-primary2 border border-primary2 hover:border-primary2 hover:text-primary2 hover:bg-white transition-all">
+            Portal IF
+            <GiMagicPortal size={16} />
+          </button>
+        </a>
       </div>
     </div>
   );

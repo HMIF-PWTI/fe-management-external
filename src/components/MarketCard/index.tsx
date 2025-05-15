@@ -2,7 +2,7 @@ import Button from "../Button";
 
 type MarketCardProps = {
   image: string;
-  name: string;
+  nama_produk: string;
   harga: string;
   className?: string;
 };
@@ -15,7 +15,7 @@ const generateWaLink = (productName: string): string => {
 
 const MarketCard: React.FC<MarketCardProps> = ({
   image,
-  name,
+  nama_produk,
   className,
   harga,
 }) => {
@@ -24,12 +24,12 @@ const MarketCard: React.FC<MarketCardProps> = ({
       <div
         className={`flex flex-col border-2 p-5 rounded-xl text-primary2 w-fit ${className}`}
       >
-        <img src={image} alt={name} className="rounded-xl mb-3 w-80" />
-        <h1>{name}</h1>
+        <img src={image} alt={nama_produk} className="rounded-xl mb-3 w-80 h-80 object-cover" />
+        <h1>{nama_produk}</h1>
         <h2 className="font-semibold mt-2">{harga}</h2>
         <div className="flex mt-3 justify-center">
           <a
-            href={generateWaLink(name)}
+            href={generateWaLink(nama_produk)}
             target="_blank"
             rel="noopener noreferrer"
             className="w-fit rounded-lg"
