@@ -7,6 +7,7 @@ import BlogPage from "@/pages/BlogPage";
 import KegiatanPage from "@/pages/KegiatanPage";
 import IfPediaPage from "@/pages/IfPediaPage";
 import LapakKwuPage from "@/pages/LapakKwuPage";
+import InfoKp from "./pages/InfoKp";
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,7 @@ function App() {
             <Route path="/ifpedia" element={<IfPediaPage />} />
             <Route path="/kegiatan" element={<KegiatanPage />} />
             <Route path="/lapakkwu" element={<LapakKwuPage />} />
+            <Route path="/infokp" element={<InfoKp />} />
           </Routes>
         </main>
         <Footer />

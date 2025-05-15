@@ -1,15 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MarketCard from "@/components/MarketCard";
 import SearchBar from "@/components/SearchBar";
 import { marketData } from "@/utils/DummyData";
 import { FormatRupiah } from "@/utils/FormatRupiah";
+import { ProductData } from "@/utils/interface";
+import { getProduct } from "@/service/Product";
 
 const MarketSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [data, setData] = useState<ProductData[]>([]);
 
-  const filteredData = marketData.filter((item) =>
-    item.nama.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredData = data.filter((item) =>
+    item.nama_produk.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getProduct();
+      setData(response.data.payload);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="px-36">
@@ -24,8 +35,8 @@ const MarketSection = () => {
             filteredData.map((data, index) => (
               <MarketCard
                 key={index}
-                image={data.image}
-                name={data.nama}
+                image={data.gambar}
+                nama_produk={data.nama_produk}
                 harga={FormatRupiah(data.harga)}
               />
             ))

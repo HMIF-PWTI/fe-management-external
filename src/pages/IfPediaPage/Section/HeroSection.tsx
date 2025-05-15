@@ -5,9 +5,7 @@ const HeroSection = () => {
   return (
     <div className="px-36">
       <div className="flex justify-center items-center mb-20">
-        <h1 className="text-5xl font-semibold italic text-primary2">
-          IF-PEDIA
-        </h1>
+        <img src="https://res.cloudinary.com/dalqxae3w/image/upload/v1747120217/IF-PEDIA_rysj4v.png" alt="" className="w-96" />
       </div>
       <img
         src={gerigi}
