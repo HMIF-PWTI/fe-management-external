@@ -25,7 +25,7 @@ const CategoryBlogButton: React.FC<ButtonProps> = ({
   return (
     <button
       {...props}
-      className={`flex items-center justify-between w-full h-20 px-6 py-2 rounded-2xl ${variantStyles[variant]} transition-colors`}
+      className={`flex items-center justify-between h-20 px-9 py-2 rounded-2xl lg:w-full ${variantStyles[variant]} transition-colors`}
     >
       <span className="text-gray-700 font-medium">{label}</span>
       <span
