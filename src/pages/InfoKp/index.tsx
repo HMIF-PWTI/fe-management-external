@@ -25,15 +25,15 @@ const InfoKp = () => {
   if (loading) {
     return <Loading />;
   }
-  return (
-    <div className="px-36 animate-slide-in py-10 flex flex-col space-y-10 justify-center items-center">
-      <h1 className="text-5xl font-semibold italic text-primary2">
-        INFO PERUSAHAAN
-      </h1>
 
+  return (
+    <div className="px-6 sm:px-12 lg:px-36 animate-slide-in py-10 flex flex-col space-y-10 justify-center items-center">
+      <h1 className="text-3xl lg:text-5xl text-center font-semibold italic text-primary2">
+        INFO PERUSAHAAN KERJA PRAKTEK
+      </h1>
       <div className="w-full overflow-hidden rounded-xl border border-primary2">
         <table className="w-full border-collapse">
-          <thead className="bg-primary2 text-white">
+          <thead className="hidden lg:table-header-group bg-primary2 text-white">
             <tr>
               <th className="border border-primary2 px-4 py-2">No</th>
               <th className="border border-primary2 px-4 py-2">
@@ -44,12 +44,17 @@ const InfoKp = () => {
           </thead>
           <tbody>
             {kpData.map((kp, index) => (
-              <tr key={kp.id} className="hover:bg-gray-100">
-                <td className="border text-center border-primary2 px-4 py-2">
+              <tr
+                key={kp.id}
+                className="block mb-4 p-4 border-b-4 border-primary2 lg:table-row lg:border-none lg:mb-0 hover:bg-gray-100"
+              >
+                <td className="hidden lg:table-cell border text-center border-primary2 px-4 py-2">
                   {index + 1}
                 </td>
-                <td className="border text-center border-primary2 px-4 py-2">{kp.nama}</td>
-                <td className="border text-center border-primary2 px-4 py-2">
+                <td className="block text-right py-2 lg:text-center lg:table-cell lg:border lg:border-primary2 before:content-['Nama_Perusahaan:'] before:float-left before:font-bold before:text-primary2">
+                  {kp.nama}
+                </td>
+                <td className="block text-right py-2 lg:text-center lg:table-cell lg:border lg:border-primary2 before:content-['Alamat:'] before:float-left before:font-bold before:text-primary2">
                   {kp.alamat}
                 </td>
               </tr>

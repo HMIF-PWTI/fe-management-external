@@ -6,9 +6,9 @@ import useEmblaCarousel from "embla-carousel-react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const KesmaSection = () => {
-  const autoplayOptions = Autoplay({ delay: 1500 });
+  const autoplayOptions = Autoplay({ delay: 3000, stopOnInteraction: false });
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true, align: "start", slidesToScroll: 1 },
+    { loop: true, align: "start" },
     [autoplayOptions]
   );
 
@@ -21,8 +21,8 @@ const KesmaSection = () => {
   }, [emblaApi]);
 
   return (
-    <div className="flex flex-col items-center justify-center px-36 space-y-10">
-      <h1 className="text-center text-primary2 text-2xl font-bold">
+    <div className="flex flex-col items-center justify-center px-6 sm:px-12 lg:px-36 space-y-10">
+      <h1 className="text-center text-primary2 text-xl lg:text-2xl font-bold">
         DIVISI <br /> KESEJAHTERAAN MAHASISWA
       </h1>
       <div className="relative w-full">
@@ -31,7 +31,7 @@ const KesmaSection = () => {
             {kesmaData.map((data, index) => (
               <div
                 key={index}
-                className="embla__slide flex w-1/4 flex-shrink-0 items-center justify-center px-2 h-[500px]"
+                className="embla__slide relative flex-shrink-0 basis-full sm:basis-1/2 lg:basis-1/4 flex items-center justify-center px-2"
               >
                 <MemberCard {...data} />
               </div>
@@ -39,13 +39,13 @@ const KesmaSection = () => {
           </div>
         </div>
         <button
-          className="absolute top-1/2 -left-12 transform -translate-y-1/2 border border-primary2 text-primary2 hover:bg-primary2 hover:text-white transition-all duration-300 p-2 items-center justify-center w-10 h-10 rounded-full"
+          className="hidden sm:flex absolute top-1/2 -left-4 lg:-left-12 transform -translate-y-1/2 border border-primary2 text-primary2 hover:bg-primary2 hover:text-white transition-all duration-300 p-2 items-center justify-center w-10 h-10 rounded-full"
           onClick={scrollPrev}
         >
           <IoIosArrowBack className="text-xl" />
         </button>
         <button
-          className="absolute top-1/2 -right-12 transform -translate-y-1/2 border border-primary2 text-primary2 hover:bg-primary2 hover:text-white transition-all duration-300 p-2 items-center justify-center w-10 h-10 rounded-full"
+          className="hidden sm:flex absolute top-1/2 -right-4 lg:-right-12 transform -translate-y-1/2 border border-primary2 text-primary2 hover:bg-primary2 hover:text-white transition-all duration-300 p-2 items-center justify-center w-10 h-10 rounded-full"
           onClick={scrollNext}
         >
           <IoIosArrowForward className="text-xl" />

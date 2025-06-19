@@ -27,16 +27,6 @@
   }
 }
 
-.embla__container {
-  display: flex;
-  gap: 1rem;
-}
-
-.embla__slide {
-  flex: 0 0 24%;
-  height: 500px;
-}
-
 .embla {
   overflow: hidden;
   position: relative;
@@ -48,8 +38,10 @@
   gap: 1rem;
 }
 
+.embla__slide {
+  height: 500px;
+}
+
 .text-indent {
   text-indent: 3rem;
 }
-
-

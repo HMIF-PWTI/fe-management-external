@@ -1,6 +1,7 @@
 import { forwardRef, useState } from "react";
 import gerigi from "@/assets/gerigi.png";
 import kuda from "@/assets/Logo/LogoHMIF.png";
+
 interface VisionMissionPagesProps {}
 
 const VisionMissionPages = forwardRef<HTMLDivElement, VisionMissionPagesProps>(
@@ -25,30 +26,32 @@ const VisionMissionPages = forwardRef<HTMLDivElement, VisionMissionPagesProps>(
     return (
       <div
         ref={ref}
-        className="relative bg-white px-36 py-10 min-h-[500px] flex items-center justify-center overflow-hidden"
+        className="relative bg-white px-6 sm:px-12 lg:px-36 py-16 min-h-[500px] flex items-center justify-center overflow-hidden"
       >
         <img
           src={gerigi}
           alt="Gerigi"
-          className="absolute left-0 top-12 h-96 w-auto object-cover"
+          className="hidden lg:block absolute left-0 top-12 h-96 w-auto object-cover"
         />
-        <div className="grid grid-cols-2 items-center gap-20 w-full">
-          <div className="">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-20 w-full">
+          <div className="space-y-4">
             <div className="flex space-x-3 justify-end items-end">
               <div className="ring-4 ring-primary2 rounded-full w-5 h-5"></div>
               <div className="ring-4 ring-primary2 rounded-full w-5 h-5"></div>
               <div className="ring-4 ring-primary2 rounded-full w-5 h-5"></div>
             </div>
             <div className="flex items-center justify-center relative">
-              <div className="absolute ring-2 ring-primary2 w-64 h-40 rounded-[50px] left-[60px] -top-10 z-0"></div>
-              <div className="absolute ring-2 ring-primary2 w-64 h-40 rounded-[50px] left-[260px] top-56 z-0"></div>
-              <img src={kuda} className="w-2/3 z-10" alt="Logo HMIF" />
+              <div className="hidden lg:block absolute ring-2 ring-primary2 w-64 h-40 rounded-[50px] left-[60px] -top-10 z-0"></div>
+              <div className="hidden lg:block absolute ring-2 ring-primary2 w-64 h-40 rounded-[50px] left-[260px] top-56 z-0"></div>
+              <img src={kuda} className="w-1/2 lg:w-2/3 z-10" alt="Logo HMIF" />
             </div>
           </div>
           <div className="space-y-6">
             <div>
-              <h1 className="text-primary2 text-3xl font-bold mb-4">Visi</h1>
-              <h2 className="text-justify text-sm leading-relaxed">
+              <h1 className="text-primary2 text-2xl lg:text-3xl font-bold mb-4">
+                Visi
+              </h1>
+              <h2 className="text-left lg:text-justify text-sm leading-relaxed">
                 Sebagai Salah Satu Organisasi Intra Kampus, HMIF didirikan
                 dengan tujuan untuk ikut mengupayakan tercapainya tujuan
                 pendidikan dan pengajaran teknologi informasi di lingkungan
@@ -59,8 +62,10 @@ const VisionMissionPages = forwardRef<HTMLDivElement, VisionMissionPagesProps>(
               </h2>
             </div>
             <div>
-              <h1 className="text-primary2 text-3xl font-bold mb-4">Misi</h1>
-              <ul className="list-disc list-outside space-y-2 text-justify text-sm leading-relaxed">
+              <h1 className="text-primary2 text-2xl lg:text-3xl font-bold mb-4">
+                Misi
+              </h1>
+              <ul className="list-disc list-outside space-y-2 text-left lg:text-justify text-sm leading-relaxed">
                 {visibleMisi.map((misi, index) => (
                   <li key={index} className="pl-2">
                     {misi}

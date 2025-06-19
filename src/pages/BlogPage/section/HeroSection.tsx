@@ -1,11 +1,9 @@
 import BlogCard from "@/components/BlogCard";
 import CategoryBlogButton from "@/components/CategoryBlogButton";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaUniversity } from "react-icons/fa";
 import { GrTechnology } from "react-icons/gr";
 import { LuGraduationCap } from "react-icons/lu";
-import { FaUniversity } from "react-icons/fa";
 import { MdOutlineEventNote } from "react-icons/md";
-
 import Image from "@/assets/roti2.jpg";
 
 const BlogData = [
@@ -83,11 +81,11 @@ const BlogData = [
 
 const HeroSection = () => {
   return (
-    <div className="relative px-36">
+    <div className="relative px-6 md:px-12 lg:px-36 py-10">
       <div>
         <h1 className="text-xl font-semibold">Konten Terbaru</h1>
       </div>
-      <div className="grid grid-cols-5 gap-5 mt-10">
+      <div className="flex space-x-4 mt-10 overflow-x-auto pb-4 lg:grid lg:grid-cols-5 lg:gap-5 lg:space-x-0">
         <CategoryBlogButton
           label="Semua"
           icon={<FaArrowRight />}
@@ -114,7 +112,8 @@ const HeroSection = () => {
           variant="secondary"
         />
       </div>
-      <div className="grid grid-cols-5 items-stretch justify-center w-full gap-3 mt-10">
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 items-stretch justify-center w-full gap-6 mt-10">
         {BlogData.map((blog, index) => (
           <div key={index} className="h-full">
             <BlogCard {...blog} />
