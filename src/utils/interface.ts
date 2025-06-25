@@ -33,3 +33,20 @@ export interface KerjaPraktek {
     nama: string;
     alamat: string;
 }
+
+export interface Activity {
+    id: number;
+    nama: string;
+    id_jenis_kegiatan: number;
+    nama_jenis_kegiatan: string;
+    id_divisi: string;
+    nama_divisi: string;
+    singkatan_divisi: string;
+    status: string;
+    tanggal_pelaksanaan: string;
+    tempat_pelaksanaan: string;
+    kegiatan_mulai: string;
+    kegiatan_berakhir: string;
+    created_at: string;
+    updated_at: string;
+}

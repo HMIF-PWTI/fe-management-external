@@ -20,7 +20,6 @@ const MarketSection = () => {
         setData(response.data.payload);
       } catch (error) {
         console.error("Failed to fetch products:", error);
-        // Handle error, misalnya dengan menampilkan pesan ke pengguna
       }
     };
     fetchData();
