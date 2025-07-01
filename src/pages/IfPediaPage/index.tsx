@@ -1,6 +1,6 @@
 import Loading from "@/components/Loading";
 import { useState, useEffect } from "react";
-import HeroSection from "./Section/HeroSection";
+import IfPediaPDF from "./Section/IfPediaPDF";
 
 const IfPediaPage = () => {
   const [loading, setLoading] = useState(true);
@@ -17,8 +17,8 @@ const IfPediaPage = () => {
     return <Loading />;
   }
   return (
-    <div className="animate-slide-in py-10">
-      <HeroSection />
+    <div className="animate-slide-in py-3">
+      <IfPediaPDF />
     </div>
   );
 };
