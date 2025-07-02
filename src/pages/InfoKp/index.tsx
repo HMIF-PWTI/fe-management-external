@@ -39,6 +39,7 @@ const InfoKp = () => {
               <th className="border border-primary2 px-4 py-2">
                 Nama Perusahaan
               </th>
+              <th className="border border-primary2 px-4 py-2">Kota</th>
               <th className="border border-primary2 px-4 py-2">Alamat</th>
             </tr>
           </thead>
@@ -51,10 +52,13 @@ const InfoKp = () => {
                 <td className="hidden lg:table-cell border text-center border-primary2 px-4 py-2">
                   {index + 1}
                 </td>
-                <td className="block text-right py-2 lg:text-center lg:table-cell lg:border lg:border-primary2 before:content-['Nama_Perusahaan:'] before:float-left before:font-bold before:text-primary2">
+                <td className="block text-right py-2 lg:text-center lg:table-cell lg:border lg:border-primary2 before:content-['Nama_Perusahaan:'] before:float-left before:font-bold before:text-primary2 lg:before:content-['']">
                   {kp.nama}
                 </td>
-                <td className="block text-right py-2 lg:text-center lg:table-cell lg:border lg:border-primary2 before:content-['Alamat:'] before:float-left before:font-bold before:text-primary2">
+                <td className="block text-right py-2 lg:text-center lg:table-cell lg:border lg:border-primary2 before:content-['Kota:'] before:float-left before:font-bold before:text-primary2 lg:before:content-['']">
+                  {kp.kota}
+                </td>
+                <td className="block text-right py-2 lg:text-center lg:table-cell lg:border lg:border-primary2 before:content-['Alamat:'] before:float-left before:font-bold before:text-primary2 lg:before:content-['']">
                   {kp.alamat}
                 </td>
               </tr>
