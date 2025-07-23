@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import HeroSection from "./section/HeroSection";
+// import HeroSection from "./section/HeroSection";
 import Loading from "@/components/Loading";
+import ComingSoon from "./section/ComingSoon";
 
 const BlogPage = () => {
   const [loading, setLoading] = useState(true);
@@ -17,8 +18,9 @@ const BlogPage = () => {
     return <Loading />;
   }
   return (
-    <div className="py-10 space-y-16 animate-slide-in">
-      <HeroSection />
+    <div className="animate-slide-in">
+      {/* <HeroSection /> */}
+      <ComingSoon />
     </div>
   );
 };

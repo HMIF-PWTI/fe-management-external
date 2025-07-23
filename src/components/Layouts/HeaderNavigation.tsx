@@ -90,9 +90,18 @@ const HeaderNavigation = () => {
         </nav>
 
         <div className="hidden lg:flex items-center space-x-4">
-          <button className="text-sm text-hitam hover:scale-110 transform transition duration-200">
+          {/* <button className="text-sm text-hitam hover:scale-110 transform transition duration-200">
             Kontak
-          </button>
+          </button> */}
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=hmifunikom@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-hitam hover:scale-110 transform transition duration-200"
+          >
+            Kontak
+          </a>
+
           <a
             href="https://www.whatsapp.com/channel/0029VbAdgGMAInPduHcDwk0g"
             target="_blank"
@@ -165,9 +174,19 @@ const HeaderNavigation = () => {
             Info KP
           </a>
           <hr className="w-3/4 border-gray-300" />
-          <button onClick={handleLinkClick} className="text-hitam text-lg">
+          {/* <button onClick={handleLinkClick} className="text-hitam text-lg">
             Kontak
-          </button>
+          </button> */}
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=hmifunikom@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-hitam hover:scale-110 transform transition duration-200"
+            onClick={handleLinkClick}
+          >
+            Kontak
+          </a>
+
           <a
             href="https://www.whatsapp.com/channel/0029VbAdgGMAInPduHcDwk0g"
             target="_blank"
