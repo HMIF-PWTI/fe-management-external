@@ -101,23 +101,23 @@ const Footer = () => {
                 <GoMail className="text-lg mr-2" />
                 hmifunikom@gmail.com
               </a>
-              <a
-                href="https://api.whatsapp.com/send/?phone=6282259934384"
+             <a
+                href="https://api.whatsapp.com/send/?phone=6281365277899"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center hover:underline"
               >
                 <FaPhoneAlt className="text-sm mr-3" />
-                08225993438 (Sukma)
+                +62 813-6527-7899 (Sakina)
               </a>
               <a
-                href="https://api.whatsapp.com/send/?phone=6285797421462"
+                href="https://api.whatsapp.com/send/?phone=6281311260499"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center hover:underline"
               >
                 <FaPhoneAlt className="text-sm mr-3" />
-                085797421462 (Salsya)
+                +62 813-1126-0499 (Andika)
               </a>
               <div>
                 <button className="p-2 border border-white rounded-lg text-xs hover:bg-white hover:text-black transition-colors duration-200">
