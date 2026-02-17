@@ -1,6 +1,6 @@
 import footer from "assets/footer.png";
 import LogoHMIF from "assets/Logo/LogoHMIF.png";
-import LogoDakshawira from "assets/Logo/LogoDakshawira.png";
+import LogoDhinakara from "assets/Logo/LogoDhinakara.png";
 import { FaInstagram, FaTiktok, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import { AiOutlineYoutube } from "react-icons/ai";
 import { GoMail } from "react-icons/go";
@@ -17,7 +17,7 @@ const Footer = () => {
             <div className="flex justify-center mt-12 sm:mt-0 items-center space-x-2">
               <img src={LogoHMIF} alt="Logo HMIF" className="w-12" />
               <img
-                src={LogoDakshawira}
+                src={LogoDhinakara}
                 alt="Logo Dakshawira"
                 className="w-12"
               />

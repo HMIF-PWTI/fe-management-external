@@ -1,5 +1,5 @@
 import LogoHMIF from "@/assets/Logo/LogoHMIF.png";
-import LogoDakshawira from "@/assets/Logo/LogoDakshawira.png";
+import LogoDhinakara from "@/assets/Logo/LogoDhinakara.png";
 import { GiMagicPortal } from "react-icons/gi";
 import { HiMenu, HiX } from "react-icons/hi";
 import { useEffect, useState } from "react";
@@ -41,7 +41,7 @@ const HeaderNavigation = () => {
       <div className="relative flex justify-between items-center px-4 md:px-8 lg:px-36 py-4">
         <div className="flex space-x-2 items-center justify-center">
           <img src={LogoHMIF} alt="Logo HMIF" className="w-12" />
-          <img src={LogoDakshawira} alt="Logo Dakshawira" className="w-10" />
+          <img src={LogoDhinakara} alt="Logo Dhinakara" className="w-10" />
         </div>
 
         <nav className="hidden lg:flex space-x-6 text-sm text-hitam p-2 items-center">

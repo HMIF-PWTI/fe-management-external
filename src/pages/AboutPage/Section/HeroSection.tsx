@@ -1,5 +1,5 @@
 import gerigi from "@/assets/gerigi.png";
-import logo from "@/assets/Logo/LogoDakshawira.png";
+import logo from "@/assets/Logo/LogoDhinakara.png";
 import { useState } from "react";
 
 const HeroSection: React.FC = () => {
@@ -17,7 +17,7 @@ const HeroSection: React.FC = () => {
   return (
     <div>
       <div className="flex flex-col items-center justify-center mb-10 lg:mb-20 px-6 text-center">
-        <h1 className="text-3xl lg:text-4xl font-bold">KABINET DAKSHAWIRA</h1>
+        <h1 className="text-3xl lg:text-4xl font-bold">KABINET DHINAKARA</h1>
         <h2>Kerja Keras, Kerja Cerdas, Kerja Ikhlas</h2>
       </div>
       <div className="relative bg-white px-6 sm:px-12 lg:px-36 py-10 min-h-[500px] flex items-center justify-center overflow-hidden">
