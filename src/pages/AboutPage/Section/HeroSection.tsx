@@ -18,7 +18,7 @@ const HeroSection: React.FC = () => {
     <div>
       <div className="flex flex-col items-center justify-center mb-10 lg:mb-20 px-6 text-center">
         <h1 className="text-3xl lg:text-4xl font-bold">KABINET DHINAKARA</h1>
-        <h2>Kerja Keras, Kerja Cerdas, Kerja Ikhlas</h2>
+        <h2>Satu Misi, Satu Aksi, Satu Tujuan</h2>
       </div>
       <div className="relative bg-white px-6 sm:px-12 lg:px-36 py-10 min-h-[500px] flex items-center justify-center overflow-hidden">
         <img
