@@ -87,6 +87,12 @@ const HeaderNavigation = () => {
           >
             Info KP
           </a>
+           <a
+            href="/kabinet"
+            className="transform hover:scale-125 transition duration-200 inline-block"
+          >
+            Kabinet
+          </a>
         </nav>
 
         <div className="hidden lg:flex items-center space-x-4">

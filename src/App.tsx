@@ -8,6 +8,7 @@ import KegiatanPage from "@/pages/KegiatanPage";
 import IfPediaPage from "@/pages/IfPediaPage";
 import LapakKwuPage from "@/pages/LapakKwuPage";
 import InfoKp from "./pages/InfoKp";
+import Kabinet from "./pages/Kabinet";
 function App() {
   return (
     <BrowserRouter>
@@ -22,6 +23,7 @@ function App() {
             <Route path="/kegiatan" element={<KegiatanPage />} />
             <Route path="/lapakkwu" element={<LapakKwuPage />} />
             <Route path="/infokp" element={<InfoKp />} />
+            <Route path="/kabinet" element={<Kabinet />} />
           </Routes>
         </main>
         <Footer />
