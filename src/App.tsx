@@ -8,7 +8,7 @@ import KegiatanPage from "@/pages/KegiatanPage";
 import IfPediaPage from "@/pages/IfPediaPage";
 import LapakKwuPage from "@/pages/LapakKwuPage";
 import InfoKp from "./pages/InfoKp";
-import Kabinet from "./pages/KegiatanPage";
+import Kabinet from "./pages/Kabinet";
 function App() {
   return (
     <BrowserRouter>
