@@ -26,41 +26,9 @@ const HeroSection: React.FC = () => {
           alt="Gerigi"
           className="hidden lg:block absolute left-0 top-0 h-96 w-auto object-cover"
         />
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-20 w-full">
+        <div className="grid grid-cols-1 items-center gap-12 w-full">
           <div className="flex items-center justify-center relative">
-            <img src={logo} className="w-2/3 lg:w-1/2 z-10" alt="Logo HMIF" />
-          </div>
-          <div className="space-y-6">
-            <div>
-              <h1 className="text-primary2 text-xl lg:text-2xl font-bold">
-                Visi
-              </h1>
-              <hr className="mb-4 border-2 border-primary2 rounded-full w-20" />
-              <h2 className="text-left lg:text-justify text-sm leading-relaxed">
-                Menjadikan Himpunan Teknik Informatika Yang Solid Dan Cemerlang,
-                Demi Terwujudnya HMIF Yang Inovatif, Kolaboratif, Serta Suportif
-                Dalam Mendukung Kemajuan Akademis Dan Non-Akademis Mahasiswa
-                Teknik Informatika.
-              </h2>
-            </div>
-            <div>
-              <h1 className="text-primary2 text-xl lg:text-2xl font-bold">
-                Misi
-              </h1>
-              <hr className="mb-4 border-2 border-primary2 rounded-full w-20" />
-              <ul className="list-disc list-outside space-y-2 text-left lg:text-justify text-sm leading-relaxed">
-                {visibleMisi.map((misi, index) => (
-                  <li key={index} className="pl-2">
-                    {misi}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex space-x-3 justify-end items-end">
-              <div className="ring-4 ring-primary2 rounded-full w-5 h-5"></div>
-              <div className="ring-4 ring-primary2 rounded-full w-5 h-5"></div>
-              <div className="ring-4 ring-primary2 rounded-full w-5 h-5"></div>
-            </div>
+            <img src={logo} className="w-2/3 lg:w-1/3 z-10" alt="Logo HMIF" />
           </div>
         </div>
       </div>
