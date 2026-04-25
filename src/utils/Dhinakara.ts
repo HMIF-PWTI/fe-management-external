@@ -106,7 +106,7 @@ export const pwtiData = [
 export const kesmaData = [
   {
     image:
-      "https://res.cloudinary.com/dalqxae3w/image/upload/v1746457343/Haykal_s1omyb.jpg",
+      "https://res.cloudinary.com/dsmdlalkz/image/upload/v1777124090/Dwi_Putra_Juniargi_ybezni.png",
     position: "KEPALA DIVISI",
     name: "Haykal Fadhillah Suryana",
   },
@@ -181,7 +181,7 @@ export const kesmaData = [
 export const kesraData = [
   {
     image:
-      "https://res.cloudinary.com/dalqxae3w/image/upload/v1746457343/Izut_uyvai9.jpg",
+      "https://res.cloudinary.com/dsmdlalkz/image/upload/v1777124089/Hadi_Rabbani_fhvz2f.png",
     position: "KEPALA DIVISI",
     name: "Moch Syahrizal Fauzan",
   },
@@ -262,7 +262,7 @@ export const kesraData = [
 export const sosmaData = [
   {
     image:
-      "https://res.cloudinary.com/dalqxae3w/image/upload/v1746457341/Sheli_lr7v3c.jpg",
+      "https://res.cloudinary.com/dsmdlalkz/image/upload/v1777124089/Raihan_Raksaguna_vhvvdh.png",
     position: "KEPALA DIVISI",
     name: "Sheli Maulida Salsiah",
   },
@@ -337,7 +337,7 @@ export const sosmaData = [
 export const paoData = [
   {
     image:
-      "https://res.cloudinary.com/dalqxae3w/image/upload/v1746457341/Natasya_nobp1u.jpg",
+      "https://res.cloudinary.com/dsmdlalkz/image/upload/v1777124089/Muhammad_Faishal_Rahmani_rnrlhl.png",
     position: "KEPALA DIVISI",
     name: "Natasya Farahdiva",
   },
@@ -424,7 +424,7 @@ export const paoData = [
 export const kwuData = [
   {
     image:
-      "https://res.cloudinary.com/dalqxae3w/image/upload/v1746457342/Nina_w7fsvs.jpg",
+      "https://res.cloudinary.com/dsmdlalkz/image/upload/v1777124086/Abdul_Malik_Febrian_Zulkifli_yls9yh.png",
     position: "KEPALA DIVISI",
     name: "Ninandya Nuraini Assyifa Gunandi",
   },
@@ -505,7 +505,7 @@ export const kwuData = [
 export const kominfoData = [
   {
     image:
-      "https://res.cloudinary.com/dalqxae3w/image/upload/v1746457347/Randi_jq8nhy.jpg",
+      "https://res.cloudinary.com/dsmdlalkz/image/upload/v1777124091/Randy_Fawwaz_Aditya_q8abbx.png",
     position: "KEPALA DIVISI",
     name: "Randi Zakaria Putra",
   },
