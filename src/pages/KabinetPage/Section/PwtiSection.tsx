@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import MemberCard from "@/components/MemberCard";
-import { pwtiData } from "@/utils/DummyData";
+import { pwtiData } from "@/utils/Dakshawira";
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";

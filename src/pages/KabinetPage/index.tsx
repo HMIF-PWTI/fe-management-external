@@ -29,14 +29,14 @@ const AboutPage = () => {
   return (
     <div className="py-10 space-y-16 animate-slide-in">
       <HeroSection />
-      <IntiSection />
+      {/* <IntiSection />
       <PwtiSection />
       <KesmaSection />
       <KesraSection />
       <SosmaSection />
       <PaoSection />
       <KwuSection />
-      <KominfoSection />
+      <KominfoSection /> */}
     </div>
   );
 };
