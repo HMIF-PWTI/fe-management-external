@@ -33,18 +33,6 @@ const HeroSection = ({ selectedKabinet, setSelectedKabinet }: HeroProps) => {
         <h1 className="text-3xl lg:text-4xl font-bold">{current.title}</h1>
         <h2 className="text-gray-500 italic">{current.tagline}</h2>
       </div>
-<<<<<<< HEAD
-      <div className="relative bg-white px-6 sm:px-12 lg:px-36 py-10 min-h-[500px] flex items-center justify-center overflow-hidden">
-        <img
-          src={gerigi}
-          alt="Gerigi"
-          className="hidden lg:block absolute left-0 top-0 h-96 w-auto object-cover"
-        />
-        <div className="grid grid-cols-1 items-center gap-12 w-full">
-          <div className="flex items-center justify-center relative">
-            <img src={logo} className="w-2/3 lg:w-1/3 z-10" alt="Logo HMIF" />
-          </div>
-=======
 
       <div className="relative w-full flex flex-col items-center justify-center space-y-8">
         <img src={current.logo} className="w-48 lg:w-64 z-10" alt="Logo" />
@@ -74,7 +62,6 @@ const HeroSection = ({ selectedKabinet, setSelectedKabinet }: HeroProps) => {
               ))}
             </div>
           )}
->>>>>>> 554f0d16a65c7bb0bd1710382836c8bcaba85f78
         </div>
       </div>
     </div>
