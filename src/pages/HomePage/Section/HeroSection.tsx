@@ -30,7 +30,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToVision }) => {
         />
 
         <h1 className="animate-slide-in">HMIF UNIKOM</h1>
-        <h1 className="animate-slide-in">2024/2025</h1>
+        <h1 className="animate-slide-in">2025/2026</h1>
         <h1 className="text-lg font-light animate-slide-in">
           Selamat Datang Di Website HMIF UNIKOM! <br /> Tempat berkumpulnya
           insan-inspiratif: brilian dalam berpikir, kreatif dalam berkarya.

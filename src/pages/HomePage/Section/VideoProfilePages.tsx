@@ -25,7 +25,7 @@ const VideoProfilePages = () => {
           </p>
           <div className="text-sm">
             <p>#MajuSolidJaya</p>
-            <p>#KerjaKerasKerjaCerdasKerjaIkhlas</p>
+            <p>#SatuMisiSatuAksiSatuTujuan</p>
           </div>
         </div>  
         <div className="flex items-center justify-center lg:justify-end">
