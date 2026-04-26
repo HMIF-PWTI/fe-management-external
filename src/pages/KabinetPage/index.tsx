@@ -1,7 +1,8 @@
-import Loading from "@/components/Loading";
-import HeroSection from "./Section/HeroSection";
 import { useEffect, useState } from "react";
-import IntiSection from "../AboutPage/Section/IntiSection";
+import Loading from "@/components/Loading";
+
+import HeroSection from "./Section/HeroSection";
+import IntiSection from "./Section/IntiSection";
 import PwtiSection from "./Section/PwtiSection";
 import KesmaSection from "./Section/KesmaSection";
 import PaoSection from "./Section/PaoSection";
@@ -10,35 +11,43 @@ import SosmaSection from "./Section/SosmaSection";
 import KwuSection from "./Section/KwuSection";
 import KominfoSection from "./Section/KominfoSection";
 
+export type KabinetKey = "Kabinet Dakshawira" | "Kabinet Dhinakara";
 
-const AboutPage = () => {
+const KabinetPage = () => {
   const [loading, setLoading] = useState(true);
+  
+  const [selectedKabinet, setSelectedKabinet] = useState<KabinetKey>("Kabinet Dhinakara"); 
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 500);
-
     return () => clearTimeout(timer);
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  if (loading) return <Loading />;
 
   return (
     <div className="py-10 space-y-16 animate-slide-in">
-      <HeroSection />
-      {/* <IntiSection />
-      <PwtiSection />
-      <KesmaSection />
-      <KesraSection />
-      <SosmaSection />
-      <PaoSection />
-      <KwuSection />
-      <KominfoSection /> */}
+     
+      <HeroSection 
+        selectedKabinet={selectedKabinet} 
+        setSelectedKabinet={setSelectedKabinet} 
+      />
+      
+     
+      <div className="space-y-20">
+        <IntiSection selectedKabinet={selectedKabinet} />
+        <PwtiSection selectedKabinet={selectedKabinet} />
+        <KesmaSection selectedKabinet={selectedKabinet} />
+        <KesraSection selectedKabinet={selectedKabinet} />
+        <SosmaSection selectedKabinet={selectedKabinet} />
+        <PaoSection selectedKabinet={selectedKabinet} />
+        <KwuSection selectedKabinet={selectedKabinet} />
+        <KominfoSection selectedKabinet={selectedKabinet} />
+      </div>
     </div>
   );
 };
 
-export default AboutPage;
+export default KabinetPage;
