@@ -1,6 +1,6 @@
 import MemberCard from "@/components/MemberCard";
 import { getAnggota } from "@/service";
-import { intiData } from "@/utils/DummyData";
+import { intiData } from "@/utils/Dhinakara";
 import { Anggota } from "@/utils/interface";
 import { useEffect, useState } from "react";
 
