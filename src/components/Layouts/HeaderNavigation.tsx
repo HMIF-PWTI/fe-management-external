@@ -179,6 +179,9 @@ const HeaderNavigation = () => {
           >
             Info KP
           </a>
+          <a href="/kabinet" className="transform hover:scale-125 transition duration-200 inline-block">
+        Kabinet
+      </a>
           <hr className="w-3/4 border-gray-300" />
           {/* <button onClick={handleLinkClick} className="text-hitam text-lg">
             Kontak
