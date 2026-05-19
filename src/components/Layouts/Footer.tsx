@@ -108,7 +108,7 @@ const Footer = () => {
                 className="flex items-center hover:underline"
               >
                 <FaPhoneAlt className="text-sm mr-3" />
-                081365277899 (Sakina)
+                081365277899 (Sakina) Internal
               </a>
               <a
                 href="https://api.whatsapp.com/send/?phone=6281311260499"
@@ -117,13 +117,13 @@ const Footer = () => {
                 className="flex items-center hover:underline"
               >
                 <FaPhoneAlt className="text-sm mr-3" />
-                081311260499 (Andika)
+                081311260499 (Andika) Eksternal
               </a>
-              <div>
+              {/* <div>
                 <button className="p-2 border border-white rounded-lg text-xs hover:bg-white hover:text-black transition-colors duration-200">
                   Selengkapnya
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
