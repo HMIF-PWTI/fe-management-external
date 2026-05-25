@@ -23,6 +23,7 @@
     "react-router-dom": "^7.4.0",
     "react-typed": "^2.0.12",
     "react-vertical-timeline-component": "^3.5.3",
+    "sweetalert2": "^11.26.25",
     "swiper": "^11.2.6"
   },
   "devDependencies": {
