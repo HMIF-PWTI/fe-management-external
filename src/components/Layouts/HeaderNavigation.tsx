@@ -2,108 +2,64 @@ import LogoHMIF from "@/assets/Logo/LogoHMIF.png";
 import LogoDhinakara from "@/assets/Logo/LogoDhinakara.png";
 import { GiMagicPortal } from "react-icons/gi";
 import { HiMenu, HiX } from "react-icons/hi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Blog", href: "/blog" },
+  { name: "IF-Pedia", href: "/ifpedia" },
+  { name: "Kegiatan", href: "/kegiatan" },
+  { name: "Lapak KWU", href: "/lapakkwu" },
+  { name: "Info KP", href: "/infokp" },
+  { name: "Kabinet", href: "/kabinet" },
+];
 
 const HeaderNavigation = () => {
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        setShowNavbar(false);
-        setIsMenuOpen(false);
-      } else {
-        setShowNavbar(true);
-      }
-
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
-
-  const handleLinkClick = () => {
-    setIsMenuOpen(false);
-  };
+  const currentPath = window.location.pathname;
 
   return (
-    <header
-      className={`sticky top-0 z-50 bg-white shadow-lg transition-transform duration-300 ${
-        showNavbar ? "translate-y-0" : "-translate-y-full"
-      }`}
-    >
-      <div className="relative flex justify-between items-center px-4 md:px-8 lg:px-36 py-4">
-        <div className="flex space-x-2 items-center justify-center">
-          <img src={LogoHMIF} alt="Logo HMIF" className="w-12" />
-          <img src={LogoDhinakara} alt="Logo Dhinakara" className="w-10" />
-        </div>
+    <header className="sticky top-0 z-[9999] border-b border-primary2/10 bg-white/90 shadow-sm backdrop-blur-xl">
+      <div className="flex items-center justify-between px-4 py-3 md:px-8 lg:px-36">
+        <a href="/" className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <img src={LogoHMIF} alt="Logo HMIF" className="w-11" />
+            <img src={LogoDhinakara} alt="Logo Dhinakara" className="w-10" />
+          </div>
 
-        <nav className="hidden lg:flex space-x-6 text-sm text-hitam p-2 items-center">
-          <a
-            href="/"
-            className="transform hover:scale-125 transition duration-200 inline-block"
-          >
-            Home
-          </a>
-          <a
-            href="/about"
-            className="transform hover:scale-125 transition duration-200 inline-block"
-          >
-            About
-          </a>
-          <a
-            href="/blog"
-            className="transform hover:scale-125 transition duration-200 inline-block"
-          >
-            Blog
-          </a>
-          <a
-            href="/ifpedia"
-            className="transform hover:scale-125 transition duration-200 inline-block"
-          >
-            IF-Pedia
-          </a>
-          <a
-            href="/kegiatan"
-            className="transform hover:scale-125 transition duration-200 inline-block"
-          >
-            Kegiatan
-          </a>
-          <a
-            href="/lapakkwu"
-            className="transform hover:scale-125 transition duration-200 inline-block"
-          >
-            Lapak KWU
-          </a>
-          <a
-            href="/infokp"
-            className="transform hover:scale-125 transition duration-200 inline-block"
-          >
-            Info KP
-          </a>
-           <a
-            href="/kabinet"
-            className="transform hover:scale-125 transition duration-200 inline-block"
-          >
-            Kabinet
-          </a>
+          <div className="hidden sm:block leading-tight">
+            <h1 className="text-sm font-bold text-primary2">HMIF UNIKOM</h1>
+            <p className="text-[11px] text-gray-500">Kabinet Dhinakara</p>
+          </div>
+        </a>
+
+        <nav className="hidden items-center gap-1 lg:flex">
+          {navLinks.map((link) => {
+            const isActive = currentPath === link.href;
+
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                  isActive
+                    ? "bg-primary2 text-white"
+                    : "text-gray-700 hover:bg-primary2/10 hover:text-primary2"
+                }`}
+              >
+                {link.name}
+              </a>
+            );
+          })}
         </nav>
 
-        <div className="hidden lg:flex items-center space-x-4">
-          {/* <button className="text-sm text-hitam hover:scale-110 transform transition duration-200">
-            Kontak
-          </button> */}
+        <div className="hidden items-center gap-3 lg:flex">
           <a
             href="https://mail.google.com/mail/?view=cm&fs=1&to=hmifunikom@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-hitam hover:scale-110 transform transition duration-200"
+            className="rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-primary2/10 hover:text-primary2"
           >
             Kontak
           </a>
@@ -112,86 +68,47 @@ const HeaderNavigation = () => {
             href="https://www.whatsapp.com/channel/0029VbAdgGMAInPduHcDwk0g"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg"
+            className="flex items-center gap-2 rounded-full border border-primary2 bg-primary2 px-5 py-2 text-sm font-semibold text-white hover:bg-white hover:text-primary2"
           >
-            <button className="flex items-center hover:scale-105 gap-2 px-4 py-2 rounded-lg text-sm text-white bg-primary2 border border-primary2 hover:border-primary2 hover:text-primary2 hover:bg-white transition-all">
-              Portal IF
-              <GiMagicPortal size={16} />
-            </button>
+            Portal IF
+            <GiMagicPortal size={16} />
           </a>
         </div>
 
-        <div className="lg:hidden">
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-hitam focus:outline-none"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <HiX size={30} /> : <HiMenu size={30} />}
-          </button>
-        </div>
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="rounded-xl border border-primary2/10 p-2 text-primary2 lg:hidden"
+        >
+          {isMenuOpen ? <HiX size={28} /> : <HiMenu size={28} />}
+        </button>
       </div>
 
       {isMenuOpen && (
-        <nav className="lg:hidden absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center p-6 space-y-4">
-          <a href="/" onClick={handleLinkClick} className="text-hitam text-lg">
-            Home
-          </a>
-          <a
-            href="/about"
-            onClick={handleLinkClick}
-            className="text-hitam text-lg"
-          >
-            About
-          </a>
-          <a
-            href="/blog"
-            onClick={handleLinkClick}
-            className="text-hitam text-lg"
-          >
-            Blog
-          </a>
-          <a
-            href="/ifpedia"
-            onClick={handleLinkClick}
-            className="text-hitam text-lg"
-          >
-            IF-Pedia
-          </a>
-          <a
-            href="/kegiatan"
-            onClick={handleLinkClick}
-            className="text-hitam text-lg"
-          >
-            Kegiatan
-          </a>
-          <a
-            href="/lapakkwu"
-            onClick={handleLinkClick}
-            className="text-hitam text-lg"
-          >
-            Lapak KWU
-          </a>
-          <a
-            href="/infokp"
-            onClick={handleLinkClick}
-            className="text-hitam text-lg"
-          >
-            Info KP
-          </a>
-          <a href="/kabinet" className="transform hover:scale-125 transition duration-200 inline-block">
-        Kabinet
-      </a>
-          <hr className="w-3/4 border-gray-300" />
-          {/* <button onClick={handleLinkClick} className="text-hitam text-lg">
-            Kontak
-          </button> */}
+        <nav className="absolute left-0 top-full z-[9999] flex w-full flex-col gap-2 border-t border-primary2/10 bg-white px-6 py-5 shadow-xl lg:hidden">
+          {navLinks.map((link) => {
+            const isActive = currentPath === link.href;
+
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsMenuOpen(false)}
+                className={`rounded-xl px-4 py-3 text-sm font-medium ${
+                  isActive
+                    ? "bg-primary2 text-white"
+                    : "text-gray-700 hover:bg-primary2/10 hover:text-primary2"
+                }`}
+              >
+                {link.name}
+              </a>
+            );
+          })}
+
           <a
             href="https://mail.google.com/mail/?view=cm&fs=1&to=hmifunikom@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-hitam hover:scale-110 transform transition duration-200"
-            onClick={handleLinkClick}
+            className="rounded-xl px-4 py-3 text-sm font-medium text-gray-700"
           >
             Kontak
           </a>
@@ -200,13 +117,10 @@ const HeaderNavigation = () => {
             href="https://www.whatsapp.com/channel/0029VbAdgGMAInPduHcDwk0g"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full"
-            onClick={handleLinkClick}
+            className="flex items-center justify-center gap-2 rounded-xl bg-primary2 px-4 py-3 text-sm font-semibold text-white"
           >
-            <button className="flex w-full justify-center items-center hover:scale-105 gap-2 px-4 py-2 rounded-lg text-sm text-white bg-primary2 border border-primary2 hover:border-primary2 hover:text-primary2 hover:bg-white transition-all">
-              Portal IF
-              <GiMagicPortal size={16} />
-            </button>
+            Portal IF
+            <GiMagicPortal size={16} />
           </a>
         </nav>
       )}

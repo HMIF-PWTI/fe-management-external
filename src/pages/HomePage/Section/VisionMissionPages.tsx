@@ -1,4 +1,5 @@
 import { forwardRef, useState } from "react";
+import { motion } from "framer-motion";
 import gerigi from "@/assets/gerigi.png";
 import kuda from "@/assets/Logo/LogoHMIF.png";
 
@@ -21,37 +22,52 @@ const VisionMissionPages = forwardRef<HTMLDivElement, VisionMissionPagesProps>(
       "Ikut serta dalam menciptakan mahasiswa yang sadar terhadap dunia perpolitikan dalam ruang lingkup Universitas.",
     ];
 
-    const visibleMisi = showAll ? misiList : misiList.slice(0, 2);
+    const visibleMisi = showAll ? misiList : misiList.slice(0, 4);
 
     return (
-      <div
+      <section
         ref={ref}
-        className="relative bg-white px-6 sm:px-12 lg:px-36 py-16 min-h-[500px] flex items-center justify-center overflow-hidden"
+        className="relative bg-gradient-to-br from-white via-white to-slate-100 px-6 py-16 sm:px-12 lg:px-36 lg:py-24 overflow-hidden"
       >
         <img
           src={gerigi}
           alt="Gerigi"
-          className="hidden lg:block absolute left-0 top-12 h-96 w-auto object-cover"
+          className="hidden lg:block absolute left-0 top-20 h-96 w-auto object-cover opacity-90"
         />
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-20 w-full">
-          <div className="space-y-4">
-            <div className="flex space-x-3 justify-end items-end">
-              <div className="ring-4 ring-primary2 rounded-full w-5 h-5"></div>
-              <div className="ring-4 ring-primary2 rounded-full w-5 h-5"></div>
-              <div className="ring-4 ring-primary2 rounded-full w-5 h-5"></div>
-            </div>
-            <div className="flex items-center justify-center relative">
-              <div className="hidden lg:block absolute ring-2 ring-primary2 w-64 h-40 rounded-[50px] left-[60px] -top-10 z-0"></div>
-              <div className="hidden lg:block absolute ring-2 ring-primary2 w-64 h-40 rounded-[50px] left-[260px] top-56 z-0"></div>
-              <img src={kuda} className="w-1/2 lg:w-2/3 z-10" alt="Logo HMIF" />
-            </div>
+
+        <div className="absolute right-10 top-20 h-72 w-72 rounded-full bg-primary2/10 blur-3xl" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 70 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className="relative z-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20"
+        >
+          <div className="relative flex items-center justify-center">
+            <div className="absolute -top-8 left-10 hidden h-44 w-72 rounded-[50px] border-2 border-primary2 lg:block" />
+            <div className="absolute bottom-4 right-10 hidden h-44 w-72 rounded-[50px] border-2 border-primary2 lg:block" />
+
+            <motion.img
+              src={kuda}
+              alt="Logo HMIF"
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="relative z-10 w-2/3 drop-shadow-2xl lg:w-3/4"
+            />
           </div>
-          <div className="space-y-6">
+
+          <div className="space-y-8">
             <div>
-              <h1 className="text-primary2 text-2xl lg:text-3xl font-bold mb-4">
+              <p className="mb-3 w-fit rounded-full bg-primary2/10 px-4 py-2 text-sm font-semibold text-primary2">
+                Arah Organisasi
+              </p>
+
+              <h1 className="mb-4 text-3xl font-extrabold text-primary2 lg:text-5xl">
                 Visi
               </h1>
-              <h2 className="text-left lg:text-justify text-sm leading-relaxed">
+
+              <p className="text-sm leading-relaxed text-gray-700 lg:text-justify lg:text-base">
                 Sebagai Salah Satu Organisasi Intra Kampus, HMIF didirikan
                 dengan tujuan untuk ikut mengupayakan tercapainya tujuan
                 pendidikan dan pengajaran teknologi informasi di lingkungan
@@ -59,36 +75,51 @@ const VisionMissionPages = forwardRef<HTMLDivElement, VisionMissionPagesProps>(
                 akademis, pencipta dan pengabdi yang bertakwa kepada Tuhan Yang
                 Maha Esa, berbudi luhur, beretos kerja, memiliki idealisme dan
                 integritas yang tinggi.
-              </h2>
+              </p>
             </div>
+
             <div>
-              <h1 className="text-primary2 text-2xl lg:text-3xl font-bold mb-4">
+              <h1 className="mb-5 text-3xl font-extrabold text-primary2 lg:text-5xl">
                 Misi
               </h1>
-              <ul className="list-disc list-outside space-y-2 text-left lg:text-justify text-sm leading-relaxed">
+
+              <div className="grid grid-cols-1 gap-4">
                 {visibleMisi.map((misi, index) => (
-                  <li key={index} className="pl-2">
-                    {misi}
-                  </li>
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    viewport={{ once: true }}
+                    className="group rounded-2xl border border-primary2/10 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary2/30 hover:shadow-xl"
+                  >
+                    <div className="flex gap-4">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary2 text-sm font-bold text-white">
+                        {index + 1}
+                      </span>
+
+                      <p className="text-sm leading-relaxed text-gray-700">
+                        {misi}
+                      </p>
+                    </div>
+                  </motion.div>
                 ))}
-              </ul>
+              </div>
+
               <button
                 onClick={() => setShowAll(!showAll)}
-                className="mt-5 px-2 text-primary2 text-sm font-semibold hover:underline"
+                className="mt-6 rounded-xl border border-primary2 bg-primary2 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:text-primary2"
               >
                 {showAll ? "Lebih Sedikit" : "Baca Selengkapnya"}
               </button>
             </div>
-            <div className="flex space-x-3 justify-end items-end">
-              <div className="ring-4 ring-primary2 rounded-full w-5 h-5"></div>
-              <div className="ring-4 ring-primary2 rounded-full w-5 h-5"></div>
-              <div className="ring-4 ring-primary2 rounded-full w-5 h-5"></div>
-            </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </section>
     );
   }
 );
+
+VisionMissionPages.displayName = "VisionMissionPages";
 
 export default VisionMissionPages;

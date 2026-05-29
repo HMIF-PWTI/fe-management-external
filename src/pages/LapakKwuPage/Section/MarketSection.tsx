@@ -22,35 +22,52 @@ const MarketSection = () => {
         console.error("Failed to fetch products:", error);
       }
     };
+
     fetchData();
   }, []);
 
   return (
-    <div className="px-6 sm:px-12 lg:px-36 py-10">
-      <div className="bg-white p-5 rounded-lg border-2">
-        <div className="flex justify-end mb-4">
-          <div className="w-full max-w-sm">
+    <section className="px-6 pb-20 sm:px-12 lg:px-36">
+      <div className="rounded-[32px] border border-primary2/10 bg-white/80 p-5 shadow-2xl shadow-primary2/10 backdrop-blur-md sm:p-8">
+        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="text-2xl font-extrabold text-primary2">
+              Produk Tersedia
+            </h2>
+            <p className="mt-1 text-sm text-gray-500">
+              Pilih produk yang kamu suka dan lakukan pemesanan.
+            </p>
+          </div>
+
+          <div className="w-full max-w-sm rounded-2xl bg-white shadow-sm">
             <SearchBar onSearch={setSearchQuery} />
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 justify-items-center">
-          {filteredData.length > 0 ? (
-            filteredData.map((data, index) => (
-              <MarketCard
+
+        {filteredData.length > 0 ? (
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3">
+            {filteredData.map((data, index) => (
+              <div
                 key={index}
-                image={data.gambar}
-                nama_produk={data.nama_produk}
-                harga={FormatRupiah(data.harga)}
-              />
-            ))
-          ) : (
-            <p className="sm:col-span-2 md:col-span-3 text-center text-gray-500 italic">
+                className="group rounded-[28px] border border-gray-100 bg-white p-4 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+              >
+                <MarketCard
+                  image={data.gambar}
+                  nama_produk={data.nama_produk}
+                  harga={FormatRupiah(data.harga)}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex min-h-[240px] items-center justify-center rounded-3xl border border-dashed border-gray-300 bg-slate-50">
+            <p className="text-center text-sm italic text-gray-500">
               Produk tidak ditemukan.
             </p>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-    </div>
+    </section>
   );
 };
 
