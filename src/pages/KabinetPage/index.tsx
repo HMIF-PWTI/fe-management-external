@@ -1,87 +1,66 @@
 import { Helmet } from "react-helmet-async";
-import { useEffect, useState } from "react";
-import Loading from "@/components/Loading";
+import { lazy, Suspense, useState } from "react";
 
 import HeroSection from "./Section/HeroSection";
-import IntiSection from "./Section/IntiSection";
-import PwtiSection from "./Section/PwtiSection";
-import KesmaSection from "./Section/KesmaSection";
-import PaoSection from "./Section/PaoSection";
-import KesraSection from "./Section/KesraSection";
-import SosmaSection from "./Section/SosmaSection";
-import KwuSection from "./Section/KwuSection";
-import KominfoSection from "./Section/KominfoSection";
+import Loading from "@/components/Loading";
 
 export type KabinetKey = "Kabinet Dakshawira" | "Kabinet Dhinakara";
 
+const IntiSection = lazy(() => import("./Section/IntiSection"));
+const PwtiSection = lazy(() => import("./Section/PwtiSection"));
+const KesmaSection = lazy(() => import("./Section/KesmaSection"));
+const PaoSection = lazy(() => import("./Section/PaoSection"));
+const KesraSection = lazy(() => import("./Section/KesraSection"));
+const SosmaSection = lazy(() => import("./Section/SosmaSection"));
+const KwuSection = lazy(() => import("./Section/KwuSection"));
+const KominfoSection = lazy(() => import("./Section/KominfoSection"));
+
 const KabinetPage = () => {
-  const [loading, setLoading] = useState(true);
   const [selectedKabinet, setSelectedKabinet] =
     useState<KabinetKey>("Kabinet Dhinakara");
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) return <Loading />;
-
   return (
     <>
-     <Helmet prioritizeSeoTags>
-  <title>Kabinet HMIF | HMIF UNIKOM</title>
+      <Helmet prioritizeSeoTags>
+        <title>Kabinet HMIF | HMIF UNIKOM</title>
 
-  <meta
-    name="title"
-    content="Kabinet HMIF | HMIF UNIKOM"
-  />
+        <meta
+          name="description"
+          content="Halaman kabinet HMIF UNIKOM berisi struktur kepengurusan kabinet saat ini dan kabinet sebelumnya, mulai dari pengurus inti hingga setiap divisi."
+        />
 
-  <meta
-    name="description"
-    content="kepengurusan kabinet sebelumnya dan kabinet saat ini, mulai dari inti hingga setiap divisi."
-  />
+        <meta
+          name="keywords"
+          content="Kabinet HMIF, HMIF UNIKOM, Kabinet Dhinakara, Kabinet Dakshawira, Pengurus HMIF"
+        />
 
-  <meta
-    name="keywords"
-    content="Kabinet HMIF, HMIF UNIKOM, Kabinet Sebelumnya, Kabinet Saat Ini, Pengurus HMIF"
-  />
+        <meta property="og:title" content="Kabinet HMIF | HMIF UNIKOM" />
+        <meta
+          property="og:description"
+          content="Struktur kepengurusan kabinet HMIF UNIKOM dari pengurus inti hingga setiap divisi."
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
 
-  <meta
-    property="og:title"
-    content="Kabinet HMIF | HMIF UNIKOM"
-  />
-
-  <meta
-    property="og:description"
-    content=" kepengurusan kabinet sebelumnya dan kabinet saat ini HMIF UNIKOM."
-  />
-
-  <meta
-    property="og:type"
-    content="website"
-  />
-</Helmet>
-
-      <div className="py-10 space-y-16 animate-slide-in">
+      <main className="py-10 space-y-16 animate-slide-in">
         <HeroSection
           selectedKabinet={selectedKabinet}
           setSelectedKabinet={setSelectedKabinet}
         />
 
-        <div className="space-y-20">
-          <IntiSection selectedKabinet={selectedKabinet} />
-          <PwtiSection selectedKabinet={selectedKabinet} />
-          <KesmaSection selectedKabinet={selectedKabinet} />
-          <KesraSection selectedKabinet={selectedKabinet} />
-          <SosmaSection selectedKabinet={selectedKabinet} />
-          <PaoSection selectedKabinet={selectedKabinet} />
-          <KwuSection selectedKabinet={selectedKabinet} />
-          <KominfoSection selectedKabinet={selectedKabinet} />
-        </div>
-      </div>
+        <Suspense fallback={<Loading />}>
+          <div className="space-y-20">
+            <IntiSection selectedKabinet={selectedKabinet} />
+            <PwtiSection selectedKabinet={selectedKabinet} />
+            <KesmaSection selectedKabinet={selectedKabinet} />
+            <KesraSection selectedKabinet={selectedKabinet} />
+            <SosmaSection selectedKabinet={selectedKabinet} />
+            <PaoSection selectedKabinet={selectedKabinet} />
+            <KwuSection selectedKabinet={selectedKabinet} />
+            <KominfoSection selectedKabinet={selectedKabinet} />
+          </div>
+        </Suspense>
+      </main>
     </>
   );
 };
