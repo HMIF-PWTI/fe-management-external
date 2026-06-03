@@ -1,6 +1,5 @@
-interface MemberCardProps {
-    image?: string;
-    position?: string;
-    name?: string;
+export interface MemberCardProps {
+  image: string;
+  position: string;
+  name: string;
 }
-
