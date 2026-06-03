@@ -13,7 +13,7 @@ const optimizeCloudinaryImage = (url: string, width = 500) => {
 
 const MemberCard = ({ name, position, image }: MemberCardProps) => {
   return (
-    <article className="w-full max-w-[260px] bg-white rounded-xl shadow-md p-4 flex flex-col items-center text-center transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+    <article className="group w-full max-w-[260px] bg-white rounded-xl shadow-md p-4 flex flex-col items-center text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
       <div className="w-full aspect-[3/4] mb-4 overflow-hidden rounded-lg bg-gray-200">
         <img
           src={optimizeCloudinaryImage(image, 500)}
@@ -28,7 +28,7 @@ const MemberCard = ({ name, position, image }: MemberCardProps) => {
           height={667}
           loading="lazy"
           decoding="async"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
