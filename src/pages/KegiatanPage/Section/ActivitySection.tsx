@@ -7,19 +7,27 @@ const ActivitySection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getActivity();
-        setActivityData(response.data.payload);
-      } catch (error) {
-        console.error("Cannot fetch data Kegiatan:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      const response = await getActivity();
 
-    fetchData();
-  }, []);
+      const data =
+        response.data?.payload ??
+        response.data?.data ??
+        response.data ??
+        [];
+
+      setActivityData(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error("Cannot fetch data Kegiatan:", error);
+      setActivityData([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchData();
+}, []);
 
   const formatTanggal = (tanggal: string) => {
     return new Date(tanggal).toLocaleDateString("id-ID", {
