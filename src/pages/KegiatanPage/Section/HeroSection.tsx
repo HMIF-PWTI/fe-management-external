@@ -1,24 +1,6 @@
 import logo from "@/assets/Logo/LogoDhinakara.png";
 
 const HeroSection: React.FC = () => {
-  const kegiatanList = [
-    {
-      title: "Musyawarah Besar HMIF",
-      date: "12 Mei 2026",
-      desc: "Kegiatan tahunan untuk membahas laporan kepengurusan, evaluasi program kerja, serta pemilihan kepengurusan baru.",
-    },
-    {
-      title: "Seminar Teknologi",
-      date: "20 Mei 2026",
-      desc: "Kegiatan edukatif untuk menambah wawasan mahasiswa Informatika mengenai perkembangan teknologi terbaru.",
-    },
-    {
-      title: "Workshop Pemrograman",
-      date: "28 Mei 2026",
-      desc: "Pelatihan praktis untuk meningkatkan kemampuan mahasiswa dalam bidang coding, web development, dan problem solving.",
-    },
-  ];
-
   return (
     <section className="overflow-hidden bg-white">
       <style>
@@ -47,9 +29,9 @@ const HeroSection: React.FC = () => {
           </h1>
 
           <p className="mt-4 max-w-2xl mx-auto text-sm lg:text-base text-gray-600 leading-relaxed">
-            Informasi kegiatan Himpunan Mahasiswa Teknik Informatika sebagai wadah
-            pengembangan akademik, non-akademik, kekeluargaan, dan kolaborasi
-            antar mahasiswa.
+            Informasi kegiatan Himpunan Mahasiswa Teknik Informatika sebagai
+            wadah pengembangan akademik, non-akademik, kekeluargaan, dan
+            kolaborasi antar mahasiswa.
           </p>
         </div>
 
@@ -76,69 +58,6 @@ const HeroSection: React.FC = () => {
               className="fill-blue-100 opacity-70"
             />
           </svg>
-        </div>
-      </div>
-
-      <div className="relative max-w-6xl mx-auto px-6 py-16">
-        <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-cyan-400 -translate-x-1/2" />
-
-        <div className="space-y-14">
-          {kegiatanList.map((item, index) => (
-            <div
-              key={index}
-              className="relative grid grid-cols-1 lg:grid-cols-2 gap-10 items-center"
-            >
-              <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-white border-2 border-cyan-400 items-center justify-center text-sm font-bold text-cyan-600 z-10">
-                {index + 1}
-              </div>
-
-              <div
-                className={`${
-                  index % 2 === 0
-                    ? "lg:pr-16"
-                    : "lg:pl-16 lg:col-start-2"
-                }`}
-              >
-                <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-                  <p className="text-xs font-semibold text-gray-500 mb-3">
-                    Nama Kegiatan
-                  </p>
-
-                  <h2 className="text-xl font-bold text-gray-800 mb-4">
-                    {item.title}
-                  </h2>
-
-                  <div className="space-y-3 text-sm text-gray-600">
-                    <p>
-                      <span className="font-semibold text-gray-800">
-                        Tanggal:
-                      </span>{" "}
-                      {item.date}
-                    </p>
-
-                    <p className="leading-relaxed">
-                      <span className="font-semibold text-gray-800">
-                        Deskripsi:
-                      </span>{" "}
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className={`hidden lg:block ${
-                  index % 2 === 0
-                    ? "lg:pl-16"
-                    : "lg:pr-16 lg:col-start-1 lg:row-start-1"
-                }`}
-              >
-                <h3 className="text-2xl lg:text-3xl font-bold text-gray-800">
-                  {item.title}
-                </h3>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>

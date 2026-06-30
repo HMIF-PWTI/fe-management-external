@@ -51,3 +51,24 @@ export interface Activity {
   created_at: string;
   updated_at: string;
 }
+
+export interface Activity {
+  id: number;
+  gambar: string | null;
+  nama: string;
+  tanggal: string;
+  deskripsi: string;
+  lokasi: string | null;
+  is_absen_active: boolean;
+  is_web_active: boolean;
+}
+
+export interface IfPedia {
+  id: number;
+  judul: string;
+  deskripsi: string | null;
+  file_pdf: string | null;
+  is_active: boolean;
+  created_at?: string;
+  updated_at?: string;
+}

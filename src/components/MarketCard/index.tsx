@@ -1,47 +1,47 @@
-import Button from "../Button";
-
 type MarketCardProps = {
   image: string;
   nama_produk: string;
   harga: string;
-  className?: string;
+  link?: string;
 };
 
-const waNumber = import.meta.env.VITE_WA_NUMBER;
-const imageBaseUrl = import.meta.env.VITE_IMAGE_BASE_URL;
-
-const generateWaLink = (productName: string): string => {
-  const message = `Hallo ka, saya ingin membeli ${productName}, kira-kira bisa COD kapan yaa???`;
-  return `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
-};
-
-const MarketCard: React.FC<MarketCardProps> = ({
-  image,
-  nama_produk,
-  className,
-  harga,
-}) => {
+const MarketCard = ({ image, nama_produk, harga, link }: MarketCardProps) => {
   return (
-    <div
-      className={`flex flex-col border-2 p-5 rounded-xl text-primary2 w-full h-full ${className}`}
-    >
-      <img
-        src={`${imageBaseUrl}/${image}`}
-        alt={nama_produk}
-        className="rounded-xl mb-3 w-full aspect-square object-cover"
-      />
-      <div className="flex flex-col flex-grow">
-        <p className="font-bold text-lg">{nama_produk}</p>
-        <p className="font-semibold mt-1">{harga}</p>
+    <div className="flex h-full flex-col overflow-hidden rounded-2xl bg-white">
+      <div className="h-80 w-full overflow-hidden rounded-2xl bg-slate-100">
+        {image ? (
+          <img
+            src={image}
+            alt={nama_produk}
+            className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+            loading="lazy"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center text-sm text-gray-400">
+            Tidak ada gambar
+          </div>
+        )}
       </div>
-      <div className="flex mt-3 justify-center pt-2">
-        <a
-          href={generateWaLink(nama_produk)}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Button variant="outline">Beli Sekarang</Button>
-        </a>
+
+      <div className="mt-5 flex flex-1 flex-col">
+        <h3 className="text-lg font-bold text-primary2">
+          {nama_produk}
+        </h3>
+
+        <p className="mt-1 text-base font-semibold text-gray-700">
+          {harga}
+        </p>
+
+        {link && (
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex w-fit items-center justify-center rounded-full bg-primary2 px-5 py-2 text-sm font-semibold text-white transition hover:bg-primary2/90"
+          >
+            Pesan Sekarang
+          </a>
+        )}
       </div>
     </div>
   );
