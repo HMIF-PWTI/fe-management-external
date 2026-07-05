@@ -72,3 +72,13 @@ export interface IfPedia {
   created_at?: string;
   updated_at?: string;
 }
+
+export interface InfoKp {
+  id: number;
+  nama_perusahaan: string;
+  kota: string;
+  alamat: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
