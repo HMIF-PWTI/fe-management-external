@@ -19,18 +19,19 @@ const MemberCarouselSection = ({
 
     return [
       Autoplay({
-        delay: 3500,
-        stopOnInteraction: true,
-        stopOnMouseEnter: true,
+        delay: 2500,
+        stopOnInteraction: false,
+        stopOnMouseEnter: false,
       }),
     ];
   }, [data.length]);
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
-      loop: data.length > 4,
+      loop: true,
       align: "start",
-      containScroll: "trimSnaps",
+      containScroll: false,
+      duration: 15,
     },
     plugins
   );
