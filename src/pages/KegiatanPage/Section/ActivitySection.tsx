@@ -5,29 +5,26 @@ import { useEffect, useState } from "react";
 const ActivitySection = () => {
   const [activityData, setActivityData] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await getActivity();
+    const fetchData = async () => {
+      try {
+        const data = await getActivity();
 
-      const data =
-        response.data?.payload ??
-        response.data?.data ??
-        response.data ??
-        [];
+        setActivityData(data);
+        setErrorMessage(null);
+      } catch (error) {
+        console.error("[Kegiatan] Gagal memuat data kegiatan:", error);
+        setActivityData([]);
+        setErrorMessage("Gagal memuat data kegiatan");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      setActivityData(Array.isArray(data) ? data : []);
-    } catch (error) {
-      console.error("Cannot fetch data Kegiatan:", error);
-      setActivityData([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  fetchData();
-}, []);
+    fetchData();
+  }, []);
 
   const formatTanggal = (tanggal: string) => {
     return new Date(tanggal).toLocaleDateString("id-ID", {
@@ -45,6 +42,21 @@ const ActivitySection = () => {
 
           <p className="text-gray-500 text-sm">
             Memuat data kegiatan...
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  if (errorMessage) {
+    return (
+      <section className="max-w-6xl mx-auto px-6 py-20">
+        <div className="flex flex-col items-center justify-center text-center gap-3">
+          <h2 className="text-2xl font-bold text-gray-800">
+            Kegiatan Tidak Dapat Dimuat
+          </h2>
+          <p className="max-w-md text-sm lg:text-base text-gray-500">
+            {errorMessage}
           </p>
         </div>
       </section>
