@@ -10,9 +10,15 @@ const ActivitySection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getActivity();
+        const response = await getActivity();
 
-        setActivityData(data);
+        const data =
+          response.data?.payload ??
+          response.data?.data ??
+          response.data ??
+          [];
+
+        setActivityData(Array.isArray(data) ? data : []);
         setErrorMessage(null);
       } catch (error) {
         console.error("[Kegiatan] Gagal memuat data kegiatan:", error);

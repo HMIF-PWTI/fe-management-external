@@ -54,11 +54,11 @@ export interface InternalActivity {
 
 export interface Activity {
   id: number;
+  gambar: string | null;
   nama: string;
   tanggal: string;
-  deskripsi?: string | null;
-  lokasi?: string | null;
-  gambar?: string | null;
+  deskripsi: string;
+  lokasi: string | null;
   is_absen_active: boolean;
   is_web_active: boolean;
 }

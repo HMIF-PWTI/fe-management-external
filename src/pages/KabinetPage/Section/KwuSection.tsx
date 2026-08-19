@@ -7,15 +7,15 @@ interface SectionProps {
   selectedKabinet: KabinetKey;
 }
 
-const PaoSection = ({ selectedKabinet }: SectionProps) => {
+const KwuSection = ({ selectedKabinet }: SectionProps) => {
   const source = selectedKabinet === "Kabinet Dhinakara" ? Dhinakara : Dakshawira;
-  const displayData = source.paoData || [];
+  const displayData = source.kwuData || [];
 
   return (
     <MemberCarouselSection
       title={
         <>
-          DIVISI <br /> PENGEMBANGAN APARATUR ORGANISASI
+          DIVISI <br /> KEWIRAUSAHAAN
         </>
       }
       data={displayData}
@@ -23,4 +23,4 @@ const PaoSection = ({ selectedKabinet }: SectionProps) => {
   );
 };
 
-export default PaoSection;
+export default KwuSection;
