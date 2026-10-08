@@ -1,13 +1,12 @@
 import Loading from "@/components/Loading";
-import { RefObject } from "react";
-
 interface PdfCanvasProps {
   loadingPdf: boolean;
   pdfError: string | null;
- canvasRef: React.RefObject<HTMLCanvasElement | null>;
+  canvasRef: React.RefObject<HTMLCanvasElement | null>;
+  onRetry: () => void;
 }
 
-const PdfCanvas = ({ loadingPdf, pdfError, canvasRef }: PdfCanvasProps) => {
+const PdfCanvas = ({ loadingPdf, pdfError, canvasRef, onRetry }: PdfCanvasProps) => {
   return (
     <div className="mx-auto flex w-full justify-center">
       <div className="relative w-full max-w-[680px] overflow-hidden bg-white shadow-2xl">
@@ -23,6 +22,13 @@ const PdfCanvas = ({ loadingPdf, pdfError, canvasRef }: PdfCanvasProps) => {
               PDF gagal tampil
             </p>
             <p className="text-sm text-gray-500">{pdfError}</p>
+            <button
+              type="button"
+              onClick={onRetry}
+              className="mt-5 rounded-lg bg-primary2 px-5 py-2 text-sm font-bold text-white"
+            >
+              Coba Lagi
+            </button>
           </div>
         )}
 

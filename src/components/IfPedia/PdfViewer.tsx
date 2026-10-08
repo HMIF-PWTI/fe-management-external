@@ -17,6 +17,7 @@ const PdfViewer = ({ ifPedia }: PdfViewerProps) => {
   const [loadingPdf, setLoadingPdf] = useState(false);
   const [pdfDoc, setPdfDoc] = useState<any>(null);
   const [pdfError, setPdfError] = useState<string | null>(null);
+  const [reloadKey, setReloadKey] = useState(0);
 
   const [numPages, setNumPages] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
@@ -45,14 +46,14 @@ const PdfViewer = ({ ifPedia }: PdfViewerProps) => {
         setPageInput("1");
       } catch (error) {
         console.error("PDF gagal dimuat:", error);
-        setPdfError("PDF gagal dimuat. Cek URL PDF atau worker PDF.js.");
+        setPdfError("HMIF-PEDIA sedang tidak dapat ditampilkan.");
       } finally {
         setLoadingPdf(false);
       }
     };
 
     loadPdf();
-  }, [ifPedia.file_pdf]);
+  }, [ifPedia.file_pdf, reloadKey]);
 
   useEffect(() => {
     if (!pdfDoc || !canvasRef.current) return;
@@ -148,6 +149,7 @@ const PdfViewer = ({ ifPedia }: PdfViewerProps) => {
         loadingPdf={loadingPdf}
         pdfError={pdfError}
         canvasRef={canvasRef}
+        onRetry={() => setReloadKey((current) => current + 1)}
       />
 
       <PdfDownload ifPedia={ifPedia} />

@@ -9,6 +9,7 @@ const navLinks = [
   { name: "About", href: "/about" },
   { name: "Blog", href: "/blog" },
   { name: "IF-Pedia", href: "/ifpedia" },
+  { name: "HMIF-PEDIA", href: "/hmif-pedia" },
   { name: "Kegiatan", href: "/kegiatan" },
   { name: "Lapak KWU", href: "/lapakkwu" },
   { name: "Info KP", href: "/infokp" },

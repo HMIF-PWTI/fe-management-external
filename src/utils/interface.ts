@@ -82,3 +82,18 @@ export interface InfoKp {
   created_at: string;
   updated_at: string;
 }
+
+export interface HmifPedia {
+  id: number;
+  judul: string;
+  deskripsi: string | null;
+  file_pdf: string;
+  pdf_url: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface HmifPediaResponse {
+  success: boolean;
+  data: HmifPedia | null;
+}

@@ -1,5 +1,6 @@
 import { getActivity } from "@/service/Kegiatan";
 import { Activity } from "@/utils/interface";
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 const ActivitySection = () => {
@@ -21,6 +22,12 @@ const ActivitySection = () => {
         setActivityData(Array.isArray(data) ? data : []);
         setErrorMessage(null);
       } catch (error) {
+        if (axios.isAxiosError(error) && error.response?.status === 404) {
+          setActivityData([]);
+          setErrorMessage(null);
+          return;
+        }
+
         console.error("[Kegiatan] Gagal memuat data kegiatan:", error);
         setActivityData([]);
         setErrorMessage("Gagal memuat data kegiatan");
@@ -69,19 +76,17 @@ const ActivitySection = () => {
     );
   }
 
-  return (
-    <section className="relative max-w-6xl mx-auto px-6 py-16 min-h-[320px]">
-      {activityData.length > 0 && (
-        <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-cyan-400 -translate-x-1/2" />
-      )}
-
-      {activityData.length === 0 ? (
+  if (activityData.length === 0) {
+    return (
+      <section className="relative max-w-6xl mx-auto px-6 py-16 min-h-[320px]">
         <div className="flex flex-col items-center justify-center text-center py-20">
           <div className="relative mb-6">
             <div className="absolute inset-0 rounded-full bg-cyan-200 animate-ping opacity-40" />
 
             <div className="relative w-24 h-24 rounded-full bg-cyan-50 border border-cyan-200 flex items-center justify-center shadow-sm animate-bounce">
-              <span className="text-4xl">📅</span>
+              <span className="text-4xl" role="img" aria-label="Kalender">
+                🗓️
+              </span>
             </div>
           </div>
 
@@ -100,8 +105,15 @@ const ActivitySection = () => {
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse delay-300" />
           </div>
         </div>
-      ) : (
-        <div className="space-y-14">
+      </section>
+    );
+  }
+
+  return (
+    <section className="relative max-w-6xl mx-auto px-6 py-16 min-h-[320px]">
+      <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-cyan-400 -translate-x-1/2" />
+
+      <div className="space-y-14">
           {activityData.map((item, index) => (
             <div
               key={item.id}
@@ -175,8 +187,7 @@ const ActivitySection = () => {
               </div>
             </div>
           ))}
-        </div>
-      )}
+      </div>
     </section>
   );
 };
