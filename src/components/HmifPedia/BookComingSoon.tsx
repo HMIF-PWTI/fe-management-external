@@ -18,7 +18,7 @@ const BookComingSoon = () => {
         role="img"
         aria-label="Ilustrasi buku terbuka"
       >
-        <div className="hmif-book-float">
+        <div className="hmif-book-static">
           <div className="hmif-book-cover" aria-hidden="true" />
           <div className="hmif-book">
             <div className="hmif-book-stack hmif-book-stack-left" aria-hidden="true">
@@ -39,20 +39,6 @@ const BookComingSoon = () => {
             <div className="hmif-book-page hmif-book-page-right">
               <PageLines />
             </div>
-            {[1, 2, 3].map((page) => (
-              <div
-                key={page}
-                className={`hmif-book-flip-sheet hmif-book-flip-sheet-${page}`}
-                aria-hidden="true"
-              >
-                <div className="hmif-book-flip-face hmif-book-flip-front">
-                  <PageLines />
-                </div>
-                <div className="hmif-book-flip-face hmif-book-flip-back">
-                  <PageLines muted />
-                </div>
-              </div>
-            ))}
             <div className="hmif-book-spine" aria-hidden="true" />
           </div>
         </div>

@@ -1,5 +1,6 @@
 import Loading from "@/components/Loading";
 import PdfViewer from "@/components/IfPedia/PdfViewer";
+import IfPediaBookEmpty from "@/components/IfPedia/IfPediaBookEmpty";
 import { getIfPedia } from "@/service/IfPedia";
 import { IfPedia } from "@/utils/interface";
 import { useEffect, useState } from "react";
@@ -41,11 +42,12 @@ const IfPediaPDF = () => {
 
   if (!ifPedia?.file_pdf) {
     return (
-      <section className="min-h-screen bg-slate-100 px-4 py-20">
-        <div className="mx-auto max-w-xl rounded-2xl bg-white p-10 text-center shadow-lg">
-          <h2 className="text-2xl font-bold text-primary2">
-            IF-Pedia Belum Tersedia
-          </h2>
+      <section className="flex min-h-[75vh] items-center justify-center overflow-hidden bg-slate-100 px-4 py-16">
+        <div className="w-full max-w-xl rounded-2xl bg-white p-8 text-center shadow-lg sm:p-12">
+          <IfPediaBookEmpty
+            title="IF-Pedia Belum Tersedia"
+            subtitle="Buku panduan IF-PEDIA saat ini belum tersedia."
+          />
         </div>
       </section>
     );
