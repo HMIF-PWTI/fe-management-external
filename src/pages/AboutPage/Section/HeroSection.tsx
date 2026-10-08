@@ -2,10 +2,10 @@ import gerigi from "@/assets/gerigi.png";
 import logo from "@/assets/Logo/LogoDhinakara.png";
 
 const misiList = [
-  "Membangun budaya profesionalisme dan kekeluargaan di antara fungsionaris untuk menciptakan lingkungan kerja yang harmonis, solid, dan produktif.",
-  "Memastikan komunikasi yang efektif dan terbuka antara himpunan dan mahasiswa, guna memenuhi kebutuhan serta menampung aspirasi mereka.",
-  "Merancang program-program inovatif yang mengasah keterampilan dan minat mahasiswa dalam bidang akademik maupun non-akademik.",
-  "Mendorong kolaborasi aktif antara mahasiswa, dosen, dan pihak terkait untuk mempererat hubungan serta memperluas jaringan di dalam dan luar kampus.",
+  "Menciptakan iklim yang harmonis berlandaskan nilai kekeluargaan guna meningkatkan profesionalitas dan solidaritas di internal HMIF UNIKOM.",
+  "Memperkuat komunikasi dan relasi dengan seluruh elemen Informatika guna menciptakan sinergitas yang konstruktif dan berkelanjutan.",
+  "Mengoptimalkan fungsi pelayanan serta peran HMIF sebagai fasilitator dalam penyaluran aspirasi dan informasi untuk meningkatkan kesejahteraan mahasiswa Teknik Informatika serta mendorong tumbuhnya kepedulian sosial di lingkungan mahasiswa.",
+  "Mewadahi dan mengembangkan potensi mahasiswa Teknik Informatika untuk berkarya, berinovasi, serta berkolaborasi dalam mengembangkan minat dan bakat, di bidang akademik maupun non-akademik.",
 ];
 
 const HeroSection = () => {
@@ -55,10 +55,10 @@ const HeroSection = () => {
               <hr className="mb-4 border-2 border-primary2 rounded-full w-20" />
 
               <p className="text-left lg:text-justify text-sm leading-relaxed text-gray-800">
-                Menjadikan Himpunan Teknik Informatika yang solid dan cemerlang,
-                demi terwujudnya HMIF yang inovatif, kolaboratif, serta suportif
-                dalam mendukung kemajuan akademis dan non-akademis mahasiswa
-                Teknik Informatika.
+                Mewujudkan Himpunan Mahasiswa Teknik Informatika UNIKOM sebagai
+                wadah yang progresif dan sinergis dalam menghadirkan inovasi
+                berkelanjutan guna memberikan kebermanfaatan bagi seluruh
+                mahasiswa Teknik Informatika.
               </p>
             </div>
 
@@ -69,13 +69,13 @@ const HeroSection = () => {
 
               <hr className="mb-4 border-2 border-primary2 rounded-full w-20" />
 
-              <ul className="list-disc list-outside space-y-2 text-left lg:text-justify text-sm leading-relaxed text-gray-800">
+              <ol className="list-decimal list-outside space-y-2 text-left lg:text-justify text-sm leading-relaxed text-gray-800 ml-4">
                 {misiList.map((misi, index) => (
                   <li key={index} className="pl-2">
                     {misi}
                   </li>
                 ))}
-              </ul>
+              </ol>
             </div>
 
             <div className="flex space-x-3 justify-end items-end">
