@@ -11,6 +11,8 @@ import LapakKwuPage from "@/pages/LapakKwuPage";
 import InfoKp from "./pages/InfoKp";
 import Kabinet from "./pages/KabinetPage";
 import DevelopersPage from "@/pages/DevelopersPage";
+import LkmmPage from "@/pages/LkmmPage";
+import LkmmFormPage from "@/pages/LkmmPage/LkmmFormPage";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
             <Route path="/lapakkwu" element={<LapakKwuPage />} />
             <Route path="/infokp" element={<InfoKp />} />
             <Route path="/kabinet" element={<Kabinet />} />
+            <Route path="/lkmm" element={<LkmmPage />} />
+            <Route path="/lkmm/pengumpulan-berkas" element={<LkmmFormPage />} />
             <Route path="/developers" element={<DevelopersPage />} />
           </Routes>
         </main>

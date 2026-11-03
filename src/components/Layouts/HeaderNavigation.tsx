@@ -3,6 +3,7 @@ import LogoDhinakara from "@/assets/Logo/LogoDhinakara.png";
 import { GiMagicPortal } from "react-icons/gi";
 import { HiMenu, HiX } from "react-icons/hi";
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -14,16 +15,18 @@ const navLinks = [
   { name: "Lapak KWU", href: "/lapakkwu" },
   { name: "Info KP", href: "/infokp" },
   { name: "Kabinet", href: "/kabinet" },
+  { name: "LKMM", href: "/lkmm" },
 ];
 
 const HeaderNavigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const currentPath = window.location.pathname;
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   return (
     <header className="sticky top-0 z-[9999] border-b border-primary2/10 bg-white/90 shadow-sm backdrop-blur-xl">
-      <div className="flex items-center justify-between px-4 py-3 md:px-8 lg:px-36">
-        <a href="/" className="flex items-center gap-3">
+      <div className="flex items-center justify-between px-4 py-3 md:px-6 lg:px-6 xl:px-12 2xl:px-28">
+        <Link to="/" className="flex items-center gap-3">
           <div className="flex items-center gap-2">
             <img src={LogoHMIF} alt="Logo HMIF" className="w-11" />
             <img src={LogoDhinakara} alt="Logo Dhinakara" className="w-10" />
@@ -33,24 +36,24 @@ const HeaderNavigation = () => {
             <h1 className="text-sm font-bold text-primary2">HMIF UNIKOM</h1>
             <p className="text-[11px] text-gray-500">Kabinet Dhinakara</p>
           </div>
-        </a>
+        </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-0.5 xl:gap-1 lg:flex">
           {navLinks.map((link) => {
             const isActive = currentPath === link.href;
 
             return (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                to={link.href}
+                className={`rounded-full px-2.5 py-1.5 xl:px-3.5 xl:py-2 text-xs xl:text-sm font-medium transition ${
                   isActive
                     ? "bg-primary2 text-white"
                     : "text-gray-700 hover:bg-primary2/10 hover:text-primary2"
                 }`}
               >
                 {link.name}
-              </a>
+              </Link>
             );
           })}
         </nav>
@@ -90,9 +93,9 @@ const HeaderNavigation = () => {
             const isActive = currentPath === link.href;
 
             return (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
                 onClick={() => setIsMenuOpen(false)}
                 className={`rounded-xl px-4 py-3 text-sm font-medium ${
                   isActive
@@ -101,7 +104,7 @@ const HeaderNavigation = () => {
                 }`}
               >
                 {link.name}
-              </a>
+              </Link>
             );
           })}
 
