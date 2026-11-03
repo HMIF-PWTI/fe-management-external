@@ -346,6 +346,12 @@ const LkmmFormPage: React.FC = () => {
 
           const regNumber = res.data?.nomor_registrasi || "";
 
+          // Template konfirmasi otomatis ke WhatsApp Narahubung 2
+          const waMessage = encodeURIComponent(
+            `Halo Panitia LKMM HMIF UNIKOM (Narahubung 2),\n\nSaya telah selesai melakukan pendaftaran online dan mengunggah seluruh berkas persyaratan LKMM HMIF 2026 melalui website.\n\n📋 *Rincian Pendaftaran Saya:*\n• No. Registrasi: *${regNumber}*\n• Nama Lengkap: *${formData.namaLengkap}*\n• NIM: *${formData.nim}*\n• Angkatan / Kelas: ${formData.angkatan} / ${formData.kelas}\n• No. WhatsApp: ${formData.noWa}\n\nMohon untuk dapat diverifikasi berkas pendaftaran saya. Terima kasih! 🙏`
+          );
+          const waUrl = `https://api.whatsapp.com/send/?phone=6282118417924&text=${waMessage}`;
+
           Swal.fire({
             icon: "success",
             title: "Pengumpulan Berkas Berhasil!",
@@ -357,8 +363,16 @@ const LkmmFormPage: React.FC = () => {
                   <p class="text-xl font-black tracking-wider text-primary2 mt-1 select-all">${regNumber}</p>
                 </div>
                 <p class="text-xs text-gray-500 leading-relaxed">
-                  Harap catat atau tangkap layar nomor registrasi ini. Anda dapat menggunakannya untuk mengecek status verifikasi di Halaman LKMM.
+                  Silakan klik tombol hijau di bawah untuk mengirimkan bukti pendaftaran ke <strong>WhatsApp Narahubung 2</strong>:
                 </p>
+                <a
+                  href="${waUrl}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px 16px; background-color: #22c55e; color: #ffffff; font-weight: 700; font-size: 13px; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35); margin-top: 6px;"
+                >
+                  📲 Kirim Konfirmasi ke WhatsApp Narahubung 2
+                </a>
               </div>
             `,
             confirmButtonColor: "#102D3F",
