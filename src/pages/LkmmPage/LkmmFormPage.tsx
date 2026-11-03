@@ -345,25 +345,26 @@ const LkmmFormPage: React.FC = () => {
           }
 
           const regNumber = res.data?.nomor_registrasi || "";
+          const isUpdate = Boolean(res.data?.is_update);
 
           // Template konfirmasi otomatis ke WhatsApp Narahubung 2
           const waMessage = encodeURIComponent(
-            `Halo Panitia LKMM HMIF UNIKOM (Narahubung 2),\n\nSaya telah selesai melakukan pendaftaran online dan mengunggah seluruh berkas persyaratan LKMM HMIF 2026 melalui website.\n\n📋 *Rincian Pendaftaran Saya:*\n• No. Registrasi: *${regNumber}*\n• Nama Lengkap: *${formData.namaLengkap}*\n• NIM: *${formData.nim}*\n• Angkatan / Kelas: ${formData.angkatan} / ${formData.kelas}\n• No. WhatsApp: ${formData.noWa}\n\nMohon untuk dapat diverifikasi berkas pendaftaran saya. Terima kasih! 🙏`
+            `Halo Panitia LKMM HMIF UNIKOM (Narahubung 2),\n\nSaya telah selesai melakukan ${isUpdate ? "*PERBAIKAN BERKAS*" : "pendaftaran online dan pengumpulan berkas"} LKMM HMIF 2026 melalui website.\n\n📋 *Rincian Pendaftaran Saya:*\n• No. Registrasi: *${regNumber}*\n• Nama Lengkap: *${formData.namaLengkap}*\n• NIM: *${formData.nim}*\n• Angkatan / Kelas: ${formData.angkatan} / ${formData.kelas}\n• No. WhatsApp: ${formData.noWa}\n\nMohon untuk dapat diverifikasi ${isUpdate ? "kembali berkas perbaikan" : "berkas pendaftaran"} saya. Terima kasih! 🙏`
           );
           const waUrl = `https://api.whatsapp.com/send/?phone=6282118417924&text=${waMessage}`;
 
           Swal.fire({
             icon: "success",
-            title: "Pengumpulan Berkas Berhasil!",
+            title: isUpdate ? "Perbaikan Berkas Berhasil Dikirim!" : "Pengumpulan Berkas Berhasil!",
             html: `
               <div class="text-center space-y-3">
-                <p class="text-sm text-gray-700">Terima kasih <strong>${formData.namaLengkap}</strong>, berkas pendaftaran LKMM Anda telah tersimpan di sistem HMIF.</p>
+                <p class="text-sm text-gray-700">Terima kasih <strong>${formData.namaLengkap}</strong>, ${isUpdate ? "berkas perbaikan Anda telah berhasil diperbarui di sistem HMIF dan dikembalikan ke antrean verifikasi panitia." : "berkas pendaftaran LKMM Anda telah tersimpan di sistem HMIF."}</p>
                 <div class="bg-primary2/5 border-2 border-primary2/20 p-4 rounded-2xl">
                   <p class="text-xs text-gray-500 font-medium">Nomor Registrasi Anda:</p>
                   <p class="text-xl font-black tracking-wider text-primary2 mt-1 select-all">${regNumber}</p>
                 </div>
                 <p class="text-xs text-gray-500 leading-relaxed">
-                  Silakan klik tombol hijau di bawah untuk mengirimkan bukti pendaftaran ke <strong>WhatsApp Narahubung 2</strong>:
+                  Silakan klik tombol hijau di bawah untuk mengirimkan bukti ${isUpdate ? "perbaikan berkas" : "pendaftaran"} ke <strong>WhatsApp Narahubung 2</strong>:
                 </p>
                 <a
                   href="${waUrl}"

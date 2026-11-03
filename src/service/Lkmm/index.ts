@@ -15,6 +15,7 @@ export interface LkmmRegistrationData {
 
 export interface LkmmResponse {
   success: boolean;
+  is_update?: boolean;
   message: string;
   nomor_registrasi?: string;
   data?: LkmmRegistrationData;
