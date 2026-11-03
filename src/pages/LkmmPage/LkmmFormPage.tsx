@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -75,19 +75,52 @@ const documentList = [
   },
 ];
 
+const DRAFT_STORAGE_KEY = "hmif_lkmm_form_draft";
+
+interface LkmmFormData {
+  namaLengkap: string;
+  nim: string;
+  angkatan: string;
+  kelas: string;
+  ipk: string;
+  noWa: string;
+  email: string;
+}
+
+const defaultFormData: LkmmFormData = {
+  namaLengkap: "",
+  nim: "",
+  angkatan: "2025",
+  kelas: "",
+  ipk: "",
+  noWa: "",
+  email: "",
+};
+
 const LkmmFormPage: React.FC = () => {
   const navigate = useNavigate();
 
-  // Form states
-  const [formData, setFormData] = useState({
-    namaLengkap: "",
-    nim: "",
-    angkatan: "2025",
-    kelas: "",
-    ipk: "",
-    noWa: "",
-    email: "",
+  // Form states - pulihkan otomatis dari localStorage jika ada draft tersimpan
+  const [formData, setFormData] = useState<LkmmFormData>(() => {
+    try {
+      const saved = localStorage.getItem(DRAFT_STORAGE_KEY);
+      if (saved) {
+        return { ...defaultFormData, ...JSON.parse(saved) };
+      }
+    } catch {
+      // ignore
+    }
+    return defaultFormData;
   });
+
+  // Simpan otomatis ke localStorage setiap kali user mengetik
+  useEffect(() => {
+    try {
+      localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(formData));
+    } catch {
+      // ignore
+    }
+  }, [formData]);
 
   const [files, setFiles] = useState<UploadedFiles>({
     formulir: null,
@@ -101,6 +134,42 @@ const LkmmFormPage: React.FC = () => {
 
   const [agreement, setAgreement] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Cek apakah ada data yang sudah terisi
+  const hasDraft = Boolean(
+    formData.namaLengkap ||
+    formData.nim ||
+    formData.kelas ||
+    formData.ipk ||
+    formData.noWa ||
+    formData.email
+  );
+
+  // Reset form / hapus draft
+  const handleResetForm = () => {
+    Swal.fire({
+      title: "Kosongkan Formulir?",
+      text: "Seluruh data yang telah Anda ketik akan dihapus dan direset.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#102D3F",
+      confirmButtonText: "Ya, Kosongkan",
+      cancelButtonText: "Batal",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        localStorage.removeItem(DRAFT_STORAGE_KEY);
+        setFormData(defaultFormData);
+        setAgreement(false);
+        Swal.fire({
+          icon: "success",
+          title: "Formulir Dikosongkan",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      }
+    });
+  };
 
   // Handle text inputs
   const handleInputChange = (
@@ -268,6 +337,13 @@ const LkmmFormPage: React.FC = () => {
           const res = await submitLkmmPendaftaran(payload);
           setIsSubmitting(false);
 
+          // Hapus draf dari localStorage setelah berhasil dikirim
+          try {
+            localStorage.removeItem(DRAFT_STORAGE_KEY);
+          } catch {
+            // ignore
+          }
+
           const regNumber = res.data?.nomor_registrasi || "";
 
           Swal.fire({
@@ -299,8 +375,8 @@ const LkmmFormPage: React.FC = () => {
 
           const errDetails = errData?.errors
             ? Object.values(errData.errors as Record<string, string[]>)
-                .flat()
-                .join("<br>")
+              .flat()
+              .join("<br>")
             : "";
 
           Swal.fire({
@@ -403,18 +479,36 @@ const LkmmFormPage: React.FC = () => {
           >
             {/* BAGIAN 1: IDENTITAS DIRI */}
             <div>
-              <div className="flex items-center gap-3 border-b border-gray-100 pb-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary2 text-white font-bold text-sm">
-                  1
+              <div className="flex items-center justify-between border-b border-gray-100 pb-3 flex-wrap gap-2">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary2 text-white font-bold text-sm">
+                    1
+                  </div>
+                  <div>
+                    <h2 className="text-base sm:text-lg font-bold text-black">
+                      Identitas Calon Peserta
+                    </h2>
+                    <p className="text-xs text-gray-500">
+                      Pastikan data diri sesuai dengan data kemahasiswaan UNIKOM.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h2 className="text-base sm:text-lg font-bold text-black">
-                    Identitas Calon Peserta
-                  </h2>
-                  <p className="text-xs text-gray-500">
-                    Pastikan data diri sesuai dengan data kemahasiswaan UNIKOM.
-                  </p>
-                </div>
+
+                {hasDraft && (
+                  <div className="flex items-center gap-2.5">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-[11px] font-semibold text-blue-700">
+                      <FiCheckCircle size={12} />
+                      <span>Draf otomatis tersimpan</span>
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleResetForm}
+                      className="text-xs font-semibold text-gray-400 hover:text-red-500 transition underline underline-offset-2"
+                    >
+                      Kosongkan Form
+                    </button>
+                  </div>
+                )}
               </div>
 
               <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -464,8 +558,8 @@ const LkmmFormPage: React.FC = () => {
                     onChange={handleInputChange}
                     className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-xs text-gray-800 focus:border-primary2 focus:ring-1 focus:ring-primary2 outline-none transition bg-white"
                   >
-                    <option value="2025">2025 (Mahasiswa Semester 2)</option>
-                    <option value="2024">2024 (Mahasiswa Semester 4)</option>
+                    <option value="2025">2025 (Mahasiswa Semester 3)</option>
+                    <option value="2024">2024 (Mahasiswa Semester 5)</option>
                   </select>
                 </div>
 
@@ -574,11 +668,10 @@ const LkmmFormPage: React.FC = () => {
                   return (
                     <div
                       key={doc.id}
-                      className={`rounded-2xl border p-4 sm:p-5 transition-all ${
-                        currentFile
-                          ? "border-green-400 bg-green-50/30"
-                          : "border-gray-200 bg-white hover:border-primary2/30"
-                      }`}
+                      className={`rounded-2xl border p-4 sm:p-5 transition-all ${currentFile
+                        ? "border-green-400 bg-green-50/30"
+                        : "border-gray-200 bg-white hover:border-primary2/30"
+                        }`}
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div className="flex-1">
