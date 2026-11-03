@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   FiArrowLeft,
@@ -17,12 +17,13 @@ import {
   FiInfo,
   FiDownload,
   FiCopy,
+  FiRefreshCw,
 } from "react-icons/fi";
 import Swal from "sweetalert2";
 
 import keren from "@/assets/keren2.png";
 import gerigi from "@/assets/gerigi.png";
-import { submitLkmmPendaftaran } from "@/service/Lkmm";
+import { submitLkmmPendaftaran, checkLkmmStatus, LkmmStatusData } from "@/service/Lkmm";
 
 interface UploadedFiles {
   [key: string]: File | null;
@@ -99,6 +100,7 @@ const defaultFormData: LkmmFormData = {
 
 const LkmmFormPage: React.FC = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   // Form states - pulihkan otomatis dari localStorage jika ada draft tersimpan
   const [formData, setFormData] = useState<LkmmFormData>(() => {
@@ -112,6 +114,10 @@ const LkmmFormPage: React.FC = () => {
     }
     return defaultFormData;
   });
+
+  // Mode Perbaikan (jika NIM terdaftar dengan status ditolak)
+  const [editModeData, setEditModeData] = useState<LkmmStatusData | null>(null);
+  const [isCheckingNim, setIsCheckingNim] = useState(false);
 
   // Simpan otomatis ke localStorage setiap kali user mengetik
   useEffect(() => {
@@ -134,6 +140,99 @@ const LkmmFormPage: React.FC = () => {
 
   const [agreement, setAgreement] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Fungsi pengecekan NIM ke backend untuk mendeteksi apakah data sudah ada dan perlu perbaikan
+  const checkExistingNim = async (nimToCheck: string, silent = false) => {
+    const trimmed = nimToCheck.trim();
+    if (!trimmed || trimmed.length < 5) return;
+
+    setIsCheckingNim(true);
+    try {
+      const res = await checkLkmmStatus(trimmed);
+      setIsCheckingNim(false);
+
+      if (res.data?.success && res.data.data) {
+        const record = res.data.data;
+
+        if (record.status === "ditolak") {
+          // Status ditolak: Muat data otomatis ke formulir (Mode Perbaikan Berkas)
+          setFormData((prev) => ({
+            ...prev,
+            namaLengkap: record.nama_lengkap || prev.namaLengkap,
+            nim: record.nim || prev.nim,
+            angkatan: record.angkatan || prev.angkatan,
+            kelas: record.kelas || prev.kelas,
+            ipk: record.ipk ? String(record.ipk) : prev.ipk,
+            noWa: record.no_wa || prev.noWa,
+            email: record.email || prev.email,
+          }));
+          setEditModeData(record);
+
+          if (!silent) {
+            Swal.fire({
+              icon: "info",
+              title: "Mode Perbaikan Berkas Aktif",
+              html: `
+                <div class="text-left text-xs space-y-2">
+                  <p class="text-gray-700">Data pendaftaran atas nama <strong>${record.nama_lengkap}</strong> (NIM: ${record.nim}) terdeteksi berstatus <span class="text-red-600 font-bold">Ditolak / Perlu Perbaikan</span>.</p>
+                  <div class="bg-red-50 border border-red-200 p-2.5 rounded-xl text-red-700">
+                    <strong>Catatan Revisi Panitia:</strong><br>
+                    <span class="italic">${record.catatan || "Harap perbaiki berkas sesuai ketentuan panitia."}</span>
+                  </div>
+                  <p class="text-green-700 font-semibold">
+                    ✅ Data identitas dan berkas lama Anda telah otomatis dimuat. Anda <strong>tidak perlu membuat pendaftaran baru (data tidak akan dobel)</strong>. Cukup perbaiki berkas atau data yang diminta.
+                  </p>
+                </div>
+              `,
+              confirmButtonColor: "#102D3F",
+              confirmButtonText: "Mulai Perbaiki Data",
+            });
+          }
+        } else if (record.status === "pending") {
+          setEditModeData(null);
+          if (!silent) {
+            Swal.fire({
+              icon: "warning",
+              title: "Pendaftaran Sedang Diverifikasi",
+              html: `
+                <p class="text-sm text-gray-700">NIM <strong>${record.nim}</strong> (${record.nama_lengkap}) sudah terdaftar dengan Nomor Registrasi <strong>${record.nomor_registrasi}</strong> dan saat ini sedang menunggu antrean verifikasi panitia.</p>
+                <p class="text-xs text-gray-500 mt-2">Anda tidak perlu mendaftar ulang agar data Anda tidak dobel di sistem.</p>
+              `,
+              confirmButtonColor: "#102D3F",
+            });
+          }
+        } else if (record.status === "diterima") {
+          setEditModeData(null);
+          if (!silent) {
+            Swal.fire({
+              icon: "success",
+              title: "Pendaftaran Sudah Diterima",
+              html: `
+                <p class="text-sm text-gray-700">Selamat! NIM <strong>${record.nim}</strong> (${record.nama_lengkap}) telah dinyatakan <strong>Lolos / Diterima</strong> dengan No. Registrasi <strong>${record.nomor_registrasi}</strong>.</p>
+              `,
+              confirmButtonColor: "#102D3F",
+            });
+          }
+        }
+      } else {
+        setEditModeData(null);
+      }
+    } catch {
+      setIsCheckingNim(false);
+      setEditModeData(null);
+    }
+  };
+
+  // Muat data jika pendaftar datang dari URL query param ?nim=xxx atau dari draf
+  useEffect(() => {
+    const urlNim = searchParams.get("nim");
+    if (urlNim) {
+      setFormData((prev) => ({ ...prev, nim: urlNim }));
+      checkExistingNim(urlNim, false);
+    } else if (formData.nim && formData.nim.trim().length >= 6) {
+      checkExistingNim(formData.nim.trim(), true);
+    }
+  }, []);
 
   // Cek apakah ada data yang sudah terisi
   const hasDraft = Boolean(
@@ -160,6 +259,7 @@ const LkmmFormPage: React.FC = () => {
       if (res.isConfirmed) {
         localStorage.removeItem(DRAFT_STORAGE_KEY);
         setFormData(defaultFormData);
+        setEditModeData(null);
         setAgreement(false);
         Swal.fire({
           icon: "success",
@@ -242,10 +342,17 @@ const LkmmFormPage: React.FC = () => {
       return;
     }
 
+    const isPerbaikan = Boolean(editModeData);
+
     // Validasi berkas upload wajib
-    const missingDocs = documentList.filter(
-      (doc) => doc.required && !files[doc.id]
-    );
+    const missingDocs = documentList.filter((doc) => {
+      if (!doc.required) return false;
+      // Jika berkas baru dipilih
+      if (files[doc.id]) return false;
+      // Jika mode perbaikan dan berkas lama sudah tersimpan di database panitia
+      if (isPerbaikan && editModeData?.existing_files?.[doc.id]) return false;
+      return true;
+    });
 
     if (missingDocs.length > 0) {
       Swal.fire({
@@ -256,7 +363,7 @@ const LkmmFormPage: React.FC = () => {
           <ul class="text-left text-xs text-red-600 list-disc list-inside space-y-1 mb-2">
             ${missingDocs.map((d) => `<li>${d.label}</li>`).join("")}
           </ul>
-          <p class="text-xs text-gray-500">Pastikan seluruh 7 dokumen persyaratan telah diunggah (maksimal 10 MB per berkas).</p>
+          <p class="text-xs text-gray-500">Pastikan seluruh 7 dokumen persyaratan telah lengkap (maksimal 10 MB per berkas).</p>
         `,
         confirmButtonColor: "#102D3F",
       });
@@ -290,26 +397,36 @@ const LkmmFormPage: React.FC = () => {
 
     // Konfirmasi Kirim
     Swal.fire({
-      title: "Konfirmasi Pengumpulan Berkas",
+      title: isPerbaikan ? "Konfirmasi Perbaikan Berkas" : "Konfirmasi Pengumpulan Berkas",
       html: `
         <div class="text-sm text-gray-600 text-left space-y-2">
-          <p>Pastikan data identitas dan seluruh berkas yang Anda kirimkan sudah benar:</p>
+          ${isPerbaikan ? `
+            <div class="bg-amber-50 border border-amber-300 p-3 rounded-xl text-xs text-amber-900 space-y-1">
+              <p class="font-bold flex items-center gap-1.5 text-amber-800">
+                <span>🔄</span> Mode Perbaikan Berkas LKMM
+              </p>
+              <p>Nomor Registrasi: <strong>${editModeData?.nomor_registrasi}</strong></p>
+              <p class="text-[11px] text-green-700 font-semibold">Data akan langsung diperbarui pada pendaftaran lama (TIDAK AKAN DOBEL di panitia).</p>
+            </div>
+          ` : `
+            <p>Pastikan data identitas dan seluruh berkas yang Anda kirimkan sudah benar:</p>
+          `}
           <div class="bg-slate-50 p-3 rounded-xl border text-xs space-y-1">
             <p><strong>Nama:</strong> ${formData.namaLengkap}</p>
             <p><strong>NIM:</strong> ${formData.nim}</p>
             <p><strong>Angkatan:</strong> ${formData.angkatan}</p>
             <p><strong>Kelas:</strong> ${formData.kelas}</p>
             <p><strong>IPK:</strong> ${formData.ipk}</p>
-            <p><strong>Total Berkas:</strong> 7 Dokumen Lengkap (&le; 10 MB)</p>
+            <p><strong>Berkas Baru:</strong> ${Object.values(files).filter(Boolean).length} Berkas</p>
           </div>
-          <p class="text-xs text-primary2 font-semibold">Kirim berkas pendaftaran Anda ke sistem sekarang?</p>
+          <p class="text-xs text-primary2 font-semibold">${isPerbaikan ? "Simpan perbaikan berkas Anda sekarang?" : "Kirim berkas pendaftaran Anda ke sistem sekarang?"}</p>
         </div>
       `,
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#102D3F",
       cancelButtonColor: "#64748b",
-      confirmButtonText: "Ya, Kirim Sekarang!",
+      confirmButtonText: isPerbaikan ? "Ya, Simpan Perbaikan!" : "Ya, Kirim Sekarang!",
       cancelButtonText: "Periksa Lagi",
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -408,7 +525,9 @@ const LkmmFormPage: React.FC = () => {
     });
   };
 
-  const uploadedCount = Object.values(files).filter(Boolean).length;
+  const effectiveUploadedCount = documentList.filter(
+    (doc) => Boolean(files[doc.id]) || Boolean(editModeData?.existing_files?.[doc.id])
+  ).length;
 
   return (
     <>
@@ -475,14 +594,14 @@ const LkmmFormPage: React.FC = () => {
             <div className="flex items-center justify-between gap-4 text-xs font-semibold">
               <span className="text-gray-600">Kelengkapan Berkas Dokumen:</span>
               <span className="text-primary2 font-bold">
-                {uploadedCount} dari {documentList.length} Berkas Terunggah ({Math.round((uploadedCount / documentList.length) * 100)}%)
+                {effectiveUploadedCount} dari {documentList.length} Berkas Lengkap ({Math.round((effectiveUploadedCount / documentList.length) * 100)}%)
               </span>
             </div>
             <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-gray-100">
               <div
                 className="h-full bg-primary2 transition-all duration-300 rounded-full"
                 style={{
-                  width: `${(uploadedCount / documentList.length) * 100}%`,
+                  width: `${(effectiveUploadedCount / documentList.length) * 100}%`,
                 }}
               />
             </div>
@@ -492,6 +611,46 @@ const LkmmFormPage: React.FC = () => {
             onSubmit={handleSubmit}
             className="rounded-3xl border border-primary2/20 bg-white p-6 sm:p-10 shadow-xl shadow-primary2/5 space-y-8"
           >
+            {/* ALERT BANNER MODE PERBAIKAN */}
+            {editModeData && (
+              <div className="rounded-2xl border-2 border-amber-300 bg-amber-50/90 p-4 sm:p-5 shadow-sm text-xs space-y-2.5">
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-200 border border-amber-300 px-3 py-1 font-bold text-amber-900 text-[11px]">
+                    <FiRefreshCw size={13} />
+                    MODE PERBAIKAN BERKAS (TIDAK AKAN DOBEL)
+                  </span>
+                  <span className="font-mono font-bold text-primary2 bg-white px-2.5 py-1 rounded-lg border border-amber-200">
+                    No. Reg: {editModeData.nomor_registrasi}
+                  </span>
+                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  Data pendaftaran atas nama <strong>{editModeData.nama_lengkap}</strong> telah <strong>terisi otomatis</strong>. Sistem akan langsung meng-update pendaftaran Anda sebelumnya di panitia tanpa membuat data dobel.
+                </p>
+                {editModeData.catatan && (
+                  <div className="rounded-xl bg-white border border-red-200 p-3 text-red-600">
+                    <p className="font-bold text-[11px] text-red-700 flex items-center gap-1">
+                      <FiAlertCircle size={13} /> Catatan Panitia LKMM:
+                    </p>
+                    <p className="mt-1 italic">{editModeData.catatan}</p>
+                  </div>
+                )}
+                <div className="flex items-center justify-between flex-wrap gap-2 pt-1 text-[11px] text-gray-500">
+                  <span>💡 <em>Berkas lama Anda sudah tersimpan. Unggah file baru hanya jika berkas tersebut perlu diganti.</em></span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEditModeData(null);
+                      setFormData(defaultFormData);
+                      localStorage.removeItem(DRAFT_STORAGE_KEY);
+                    }}
+                    className="text-red-500 hover:underline font-semibold"
+                  >
+                    Batal Mode Perbaikan
+                  </button>
+                </div>
+              </div>
+            )}
+
             {/* BAGIAN 1: IDENTITAS DIRI */}
             <div>
               <div className="flex items-center justify-between border-b border-gray-100 pb-3 flex-wrap gap-2">
@@ -548,18 +707,50 @@ const LkmmFormPage: React.FC = () => {
 
                 {/* NIM */}
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                    NIM (Nomor Induk Mahasiswa) <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="nim"
-                    value={formData.nim}
-                    onChange={handleInputChange}
-                    placeholder="Contoh: 10122001"
-                    required
-                    className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-xs text-gray-800 placeholder-gray-400 focus:border-primary2 focus:ring-1 focus:ring-primary2 outline-none transition"
-                  />
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="block text-xs font-bold text-gray-700">
+                      NIM (Nomor Induk Mahasiswa) <span className="text-red-500">*</span>
+                    </label>
+                    {isCheckingNim ? (
+                      <span className="text-[10px] text-primary2 font-semibold flex items-center gap-1 animate-pulse">
+                        <FiRefreshCw className="animate-spin" size={10} />
+                        Memeriksa NIM...
+                      </span>
+                    ) : editModeData ? (
+                      <span className="text-[10px] text-green-700 font-bold flex items-center gap-1">
+                        <FiCheckCircle size={11} /> NIM Terhubung
+                      </span>
+                    ) : null}
+                  </div>
+                  <div className="relative flex items-center gap-2">
+                    <input
+                      type="text"
+                      name="nim"
+                      value={formData.nim}
+                      onChange={handleInputChange}
+                      onBlur={() => {
+                        if (formData.nim.trim().length >= 6) {
+                          checkExistingNim(formData.nim.trim(), false);
+                        }
+                      }}
+                      placeholder="Contoh: 10122001"
+                      required
+                      className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-xs text-gray-800 placeholder-gray-400 focus:border-primary2 focus:ring-1 focus:ring-primary2 outline-none transition"
+                    />
+                    {formData.nim.trim().length >= 6 && !editModeData && (
+                      <button
+                        type="button"
+                        onClick={() => checkExistingNim(formData.nim.trim(), false)}
+                        className="shrink-0 px-3 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition"
+                        title="Periksa apakah NIM sudah terdaftar / perlu perbaikan"
+                      >
+                        Cek NIM
+                      </button>
+                    )}
+                  </div>
+                  <p className="mt-1 text-[10px] text-gray-400">
+                    Ketik NIM Anda. Jika berkas Anda pernah ditolak, data lama akan otomatis dimuat untuk diperbaiki.
+                  </p>
                 </div>
 
                 {/* Angkatan */}
@@ -683,10 +874,13 @@ const LkmmFormPage: React.FC = () => {
                   return (
                     <div
                       key={doc.id}
-                      className={`rounded-2xl border p-4 sm:p-5 transition-all ${currentFile
-                        ? "border-green-400 bg-green-50/30"
-                        : "border-gray-200 bg-white hover:border-primary2/30"
-                        }`}
+                      className={`rounded-2xl border p-4 sm:p-5 transition-all ${
+                        currentFile
+                          ? "border-green-400 bg-green-50/30"
+                          : editModeData?.existing_files?.[doc.id]
+                          ? "border-blue-300 bg-blue-50/20"
+                          : "border-gray-200 bg-white hover:border-primary2/30"
+                      }`}
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div className="flex-1">
@@ -700,6 +894,11 @@ const LkmmFormPage: React.FC = () => {
                             <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600">
                               Maks. 10 MB
                             </span>
+                            {editModeData?.existing_files?.[doc.id] && !currentFile && (
+                              <span className="rounded-md bg-blue-100 px-2 py-0.5 text-[10px] font-bold text-blue-700">
+                                Berkas Lama Tersimpan
+                              </span>
+                            )}
                           </div>
                           <p className="mt-1 text-xs text-gray-500 ml-8 leading-relaxed">
                             {doc.desc}
@@ -727,6 +926,28 @@ const LkmmFormPage: React.FC = () => {
                               >
                                 <FiTrash2 size={15} />
                               </button>
+                            </div>
+                          ) : editModeData?.existing_files?.[doc.id] ? (
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="inline-flex items-center gap-1.5 rounded-xl border border-blue-200 bg-blue-50 px-3 py-2 text-xs font-semibold text-blue-700">
+                                <FiCheckCircle size={14} className="text-blue-600" />
+                                <span>Tersimpan</span>
+                              </span>
+                              <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-primary2/30 bg-white px-3 py-2 text-xs font-semibold text-primary2 transition hover:bg-primary2 hover:text-white shadow-sm">
+                                <FiUploadCloud size={14} />
+                                <span>Ganti Berkas</span>
+                                <input
+                                  type="file"
+                                  accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                                  onChange={(e) => {
+                                    if (e.target.files && e.target.files[0]) {
+                                      handleFileChange(doc.id, e.target.files[0]);
+                                    }
+                                    e.target.value = "";
+                                  }}
+                                  className="hidden"
+                                />
+                              </label>
                             </div>
                           ) : (
                             <label className="inline-flex cursor-pointer items-center gap-2 rounded-xl border-2 border-dashed border-primary2/30 bg-primary2/5 px-4 py-2 text-xs font-semibold text-primary2 transition hover:bg-primary2 hover:text-white">
@@ -786,12 +1007,12 @@ const LkmmFormPage: React.FC = () => {
                 {isSubmitting ? (
                   <>
                     <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                    <span>Mengunggah Berkas ke Server...</span>
+                    <span>{editModeData ? "Menyimpan Perbaikan..." : "Mengunggah Berkas ke Server..."}</span>
                   </>
                 ) : (
                   <>
                     <FiSend size={15} />
-                    <span>Kirim Berkas Pendaftaran LKMM</span>
+                    <span>{editModeData ? "Simpan Perbaikan Berkas LKMM" : "Kirim Berkas Pendaftaran LKMM"}</span>
                   </>
                 )}
               </button>

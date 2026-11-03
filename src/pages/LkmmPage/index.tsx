@@ -1325,7 +1325,7 @@ const LkmmPage = () => {
                     type="button"
                     onClick={() => {
                       setIsStatusModalOpen(false);
-                      navigate("/lkmm/pengumpulan-berkas");
+                      navigate(`/lkmm/pengumpulan-berkas?nim=${encodeURIComponent(statusResult.nim)}`);
                     }}
                     className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-red-700 shadow-md"
                   >

@@ -28,9 +28,13 @@ export interface LkmmStatusData {
   nim: string;
   angkatan: string;
   kelas: string;
+  ipk?: string;
+  no_wa?: string;
+  email?: string;
   status: "pending" | "diterima" | "ditolak" | string;
   catatan?: string | null;
   created_at?: string | null;
+  existing_files?: Record<string, boolean>;
 }
 
 export interface LkmmStatusResponse {
