@@ -52,13 +52,13 @@ const documentList = [
   {
     id: "cv",
     label: "Curriculum Vitae (CV)",
-    desc: "CV terbaru sesuai template kepanitiaan HMIF.",
+    desc: "CV terbaru calon pendaftar.",
     required: true,
   },
   {
     id: "suratAktif",
     label: "Surat Keterangan Aktif Mahasiswa",
-    desc: "Surat resmi dari BAA / Program Studi Teknik Informatika UNIKOM.",
+    desc: "Surat keterangan resmi dari BAAK UNIKOM.",
     required: true,
   },
   {

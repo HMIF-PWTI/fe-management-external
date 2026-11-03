@@ -74,7 +74,7 @@ const requirementsData: RequirementItem[] = [
   {
     id: 5,
     title: "Surat Keterangan Aktif Mahasiswa",
-    desc: "Bukti surat keterangan aktif kuliah yang diterbitkan resmi oleh BAA / Program Studi Teknik Informatika UNIKOM.",
+    desc: "Bukti surat keterangan aktif kuliah yang diterbitkan resmi dari BAAK  Universitas Komputer Indonesia",
     badge: "Wajib",
   },
   {
@@ -811,7 +811,7 @@ const LkmmPage = () => {
                     <p className="mt-3 text-sm leading-relaxed text-gray-700">
                       Calon peserta wajib mendownload berkas resmi melalui website
                       HMIF UNIKOM. Berkas meliputi Formulir Pendaftaran, Surat
-                      Pernyataan Calon Pendaftar, Surat Izin Orang Tua, format CV,
+                      Pernyataan Calon Pendaftar, Surat Izin Orang Tua,
                       dan surat keterangan sementara jika diperlukan.
                     </p>
 
@@ -898,7 +898,7 @@ const LkmmPage = () => {
                       Platform: Website HMIF UNIKOM
                     </span>
                     <a
-                      href="https://api.whatsapp.com/send/?phone=6281365277899"
+                      href="https://api.whatsapp.com/send/?phone=6281312586190"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs font-bold text-primary2 hover:underline"
@@ -1166,22 +1166,22 @@ const LkmmPage = () => {
 
                 <div className="flex flex-wrap justify-center gap-4">
                   <a
-                    href="https://api.whatsapp.com/send/?phone=6281365277899"
+                    href="https://api.whatsapp.com/send/?phone=6281312586190"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-xl border border-primary2 bg-primary2 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary2/20 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:text-primary2"
                   >
                     <FaWhatsapp size={18} />
-                    <span>Narahubung (Internal)</span>
+                    <span>Narahubung 1</span>
                   </a>
                   <a
-                    href="https://api.whatsapp.com/send/?phone=6281311260499"
+                    href="https://api.whatsapp.com/send/?phone=6282118417924"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-xl border border-primary2/20 bg-white px-6 py-3.5 text-sm font-semibold text-primary2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary2 hover:bg-slate-50"
                   >
                     <FaWhatsapp size={18} />
-                    <span>Narahubung (Eksternal)</span>
+                    <span>Narahubung 2</span>
                   </a>
                 </div>
               </div>
