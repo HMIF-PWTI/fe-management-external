@@ -33,6 +33,7 @@ import Swal from "sweetalert2";
 import keren from "@/assets/keren2.png";
 import gerigi from "@/assets/gerigi.png";
 import { checkLkmmStatus, LkmmStatusData } from "@/service/Lkmm";
+import { LKMM_REGISTRATION_CLOSED } from "@/service/Lkmm/config";
 
 interface RequirementItem {
   id: number;
@@ -229,6 +230,16 @@ const LkmmPage = () => {
   };
 
   const handleProceedToSubmission = () => {
+    if (LKMM_REGISTRATION_CLOSED) {
+      Swal.fire({
+        icon: "info",
+        title: "PENDAFTARAN LKMM SUDAH DITUTUP",
+        text: "Terima kasih atas antusiasmenya. Pengumpulan berkas LKMM sudah tidak dapat dilakukan.",
+        confirmButtonColor: "#102D3F",
+        confirmButtonText: "Mengerti",
+      });
+      return;
+    }
     if (checkedItems.length < requirementsData.length) {
       Swal.fire({
         icon: "warning",
@@ -365,6 +376,13 @@ const LkmmPage = () => {
           />
 
           <div className="relative z-10 mx-auto max-w-4xl text-center">
+            {LKMM_REGISTRATION_CLOSED && (
+              <div className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-red-600">
+                <FiLock size={14} />
+                <span>Pendaftaran LKMM Telah Ditutup</span>
+              </div>
+            )}
+
             {/* JUDUL UTAMA - FULL HITAM */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -691,7 +709,9 @@ const LkmmPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               className={`mt-10 rounded-3xl border-2 p-6 sm:p-8 transition-all ${
-                isAllChecked
+                LKMM_REGISTRATION_CLOSED
+                  ? "border-red-200 bg-red-50/60"
+                  : isAllChecked
                   ? "border-primary2 bg-primary2/5 shadow-xl shadow-primary2/10"
                   : "border-gray-200 bg-slate-50/70"
               }`}
@@ -705,7 +725,12 @@ const LkmmPage = () => {
                         : "bg-gray-200 text-gray-600"
                     }`}
                   >
-                    {isAllChecked ? (
+                    {LKMM_REGISTRATION_CLOSED ? (
+                      <>
+                        <FiLock size={14} className="text-red-600" />
+                        <span className="text-red-600">Status: Pendaftaran Ditutup</span>
+                      </>
+                    ) : isAllChecked ? (
                       <>
                         <FiCheckCircle size={14} className="text-primary2" />
                         <span>Persyaratan Lengkap ({checkedItems.length}/{requirementsData.length})</span>
@@ -719,13 +744,17 @@ const LkmmPage = () => {
                   </div>
 
                   <h3 className="text-xl font-extrabold text-primary2 sm:text-2xl">
-                    {isAllChecked
+                    {LKMM_REGISTRATION_CLOSED
+                      ? "Pendaftaran LKMM Sudah Ditutup"
+                      : isAllChecked
                       ? "Semua Persyaratan Sudah Siap!"
                       : "Checklist Terlebih Dahulu Persyaratan"}
                   </h3>
 
                   <p className="mt-1.5 text-xs sm:text-sm text-gray-600 max-w-xl leading-relaxed">
-                    {isAllChecked
+                    {LKMM_REGISTRATION_CLOSED
+                      ? "Terima kasih atas antusiasme Anda. Pengumpulan berkas online sudah tidak dibuka lagi. Pendaftar sebelumnya tetap dapat memeriksa status melalui tombol Cek Status Pendaftaran."
+                      : isAllChecked
                       ? "Luar biasa! Seluruh 10 persyaratan telah Anda siapkan. Silakan klik tombol di samping untuk masuk ke form pengumpulan berkas online."
                       : "Tombol pengumpulan berkas akan terbuka secara otomatis setelah Anda mencentang seluruh 10 persyaratan di atas."}
                   </p>
@@ -736,12 +765,17 @@ const LkmmPage = () => {
                     type="button"
                     onClick={handleProceedToSubmission}
                     className={`w-full md:w-auto inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-4 text-sm font-bold shadow-md transition-all duration-300 ${
-                      isAllChecked
+                      isAllChecked && !LKMM_REGISTRATION_CLOSED
                         ? "border-2 border-primary2 bg-primary2 text-white shadow-primary2/25 hover:-translate-y-1 hover:bg-white hover:text-primary2 cursor-pointer"
                         : "border-2 border-gray-300 bg-gray-200 text-gray-400 hover:border-gray-400 cursor-not-allowed"
                     }`}
                   >
-                    {isAllChecked ? (
+                    {LKMM_REGISTRATION_CLOSED ? (
+                      <>
+                        <FiLock size={18} />
+                        <span>Pendaftaran Ditutup</span>
+                      </>
+                    ) : isAllChecked ? (
                       <>
                         <FiUnlock size={18} />
                         <span>Kumpulkan Berkas Sekarang</span>

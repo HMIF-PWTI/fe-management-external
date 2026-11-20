@@ -24,6 +24,7 @@ import Swal from "sweetalert2";
 import keren from "@/assets/keren2.png";
 import gerigi from "@/assets/gerigi.png";
 import { submitLkmmPendaftaran, checkLkmmStatus, LkmmStatusData } from "@/service/Lkmm";
+import { LKMM_REGISTRATION_CLOSED } from "@/service/Lkmm/config";
 
 interface UploadedFiles {
   [key: string]: File | null;
@@ -528,6 +529,30 @@ const LkmmFormPage: React.FC = () => {
   const effectiveUploadedCount = documentList.filter(
     (doc) => Boolean(files[doc.id]) || Boolean(editModeData?.existing_files?.[doc.id])
   ).length;
+
+  if (LKMM_REGISTRATION_CLOSED) {
+    return (
+      <>
+        <Helmet prioritizeSeoTags>
+          <title>Pendaftaran LKMM Ditutup | HMIF UNIKOM</title>
+        </Helmet>
+        <div className="flex min-h-screen items-center justify-center bg-slate-50/60 px-6">
+          <div className="max-w-md rounded-3xl border border-red-200 bg-white p-8 text-center shadow-lg">
+            <h1 className="text-2xl font-extrabold text-primary2">Pendaftaran LKMM Sudah Ditutup</h1>
+            <p className="mt-3 text-sm text-gray-600">
+              Pengumpulan berkas LKMM sudah tidak dibuka lagi. Terima kasih atas antusiasme Anda.
+            </p>
+            <Link
+              to="/lkmm"
+              className="mt-6 inline-block rounded-xl border border-primary2 bg-primary2 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-primary2"
+            >
+              Kembali ke Halaman LKMM
+            </Link>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
